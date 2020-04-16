@@ -117,11 +117,11 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		static int j = 0;
 	
 		if(htim==(&htim2))
-    {
+		{
 			if(SX1301Status.StartSuccesFlag == 0){
 				MaxCount = 200;
 			}else{
-			  MaxCount = 1000;
+				MaxCount = 1000;
 			}
 			
 			if(i >= MaxCount){
@@ -132,16 +132,14 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 			i++;
 			j++;
 			
-	    if(j >= 1000){
-				if(SystemRunState.state == ConfigToolRun && CT_ConnectUpper == 0){
-					DEBUG_Printf("ConfigTool V1.2.2 Runing \r\n");
+			if(j >= 1000){
+				if(SystemRunState.state == FactoryTestMode){
+					//DEBUG_Printf("ConfigTool V1.2.2 Runing \r\n");
 				}
 				
-				if(SystemRunState.state == AnalysisRun && AT_ConnectUpper == 0){
-					DEBUG_Printf("AnalysisTool V3.0.0 Runing \r\n");
+				if(SystemRunState.state == FactoryDebugMode){
+					//DEBUG_Printf("AnalysisTool V3.0.0 Runing \r\n");
 				}
-				
-				
 				j = 0;
 			}
 			

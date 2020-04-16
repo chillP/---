@@ -37,6 +37,7 @@
 #include "loragw_spi.h"
 #include "ConfigTool.h"
 #include "p2p.h"
+#include "GasSensorTest.h"
 
 extern USART_RECEIVETYPE Usart2_RX;
 
@@ -83,11 +84,11 @@ void ModeChoice(){
 			
 			while(KEYA == 0);
 			
-			if(SystemRunState.state == AnalysisRun){
-				SystemRunState.state = ConfigToolInit;
+			if(SystemRunState.state == FactoryTestMode){
+				SystemRunState.state = FactoryDebugMode;
 				BLE_LEDSET(1);
 			}else{
-				SystemRunState.state = AnalysisInit;
+				SystemRunState.state = FactoryTestMode;
 				BLE_LEDSET(0);
 				}
 		}
@@ -161,6 +162,14 @@ int main(void)
 			
 			case Begin:
 				
+				break;
+			//燃气检测DTU测试模式
+			case FactoryTestMode:
+					FactoryTestMode_Run();
+				break;
+			//燃气检测DTU透传模式
+			case FactoryDebugMode:
+					FactoryDebugMode_Run();
 				break;
 			// 解析工具初始化
 			case AnalysisInit:
