@@ -6,14 +6,14 @@ gwtests1\stm32l0xx_hal_tim.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_
 gwtests1\stm32l0xx_hal_tim.o: ../Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l0xx.h
 gwtests1\stm32l0xx_hal_tim.o: ../Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l071xx.h
 gwtests1\stm32l0xx_hal_tim.o: ../Drivers/CMSIS/Include/core_cm0plus.h
-gwtests1\stm32l0xx_hal_tim.o: D:\Software\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+gwtests1\stm32l0xx_hal_tim.o: D:\Software\Keil5.28\ARM\ARMCC\Bin\..\include\stdint.h
 gwtests1\stm32l0xx_hal_tim.o: ../Drivers/CMSIS/Include/core_cmInstr.h
 gwtests1\stm32l0xx_hal_tim.o: ../Drivers/CMSIS/Include/cmsis_armcc.h
 gwtests1\stm32l0xx_hal_tim.o: ../Drivers/CMSIS/Include/core_cmFunc.h
 gwtests1\stm32l0xx_hal_tim.o: ../Drivers/CMSIS/Device/ST/STM32L0xx/Include/system_stm32l0xx.h
 gwtests1\stm32l0xx_hal_tim.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal.h
 gwtests1\stm32l0xx_hal_tim.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h
-gwtests1\stm32l0xx_hal_tim.o: D:\Software\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+gwtests1\stm32l0xx_hal_tim.o: D:\Software\Keil5.28\ARM\ARMCC\Bin\..\include\stddef.h
 gwtests1\stm32l0xx_hal_tim.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rcc_ex.h
 gwtests1\stm32l0xx_hal_tim.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio.h
 gwtests1\stm32l0xx_hal_tim.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio_ex.h

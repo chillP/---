@@ -40,6 +40,7 @@
 #include "GasSensorTest.h"
 
 extern USART_RECEIVETYPE Usart2_RX;
+extern struct SX1301Status_S SX1301Status;
 
 /* USER CODE END Includes */
 
@@ -140,9 +141,10 @@ int main(void)
 	
 	Sx1301SpiInit();
 	//AnalysisTool_init();
-	SystemRunState.state = AnalysisInit;
-	//ConfigTool_Init();
+	SystemRunState.state = TestmodeInit;
 	
+	//ConfigTool_Init();
+
 	
   /* USER CODE END 2 */
 
@@ -155,13 +157,22 @@ int main(void)
 		
 
     /* USER CODE BEGIN 3 */
-		ModeChoice();
+		//ModeChoice();
 		
 		// 状态机
 		switch(SystemRunState.state){
 			
 			case Begin:
 				
+				break;
+			//测试模式初始化
+			case TestmodeInit:
+					TestMode_Init();
+					SystemRunState.state = FactoryTestMode;
+				break;
+			//透传模式初始化
+			case DebugmodeInit:
+					DebugMode_Init();
 				break;
 			//燃气检测DTU测试模式
 			case FactoryTestMode:
@@ -171,6 +182,9 @@ int main(void)
 			case FactoryDebugMode:
 					FactoryDebugMode_Run();
 				break;
+
+			
+			
 			// 解析工具初始化
 			case AnalysisInit:
 					AnalysisTool_init();

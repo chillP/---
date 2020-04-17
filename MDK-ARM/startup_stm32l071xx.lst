@@ -385,17 +385,17 @@ ARM Macro Assembler    Page 6
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M0+ --apcs=inter
 work --depend=gwtests1\startup_stm32l071xx.d -ogwtests1\startup_stm32l071xx.o -
-IG:\工作\燃气检测软件\模拟网关软件\V1.0.0\MDK-ARM\RTE -ID:\Software\Keil_v5\ARM
-\PACK\ARM\CMSIS\4.5.0\CMSIS\Include -ID:\Software\Keil_v5\ARM\PACK\Keil\STM32L0
-xx_DFP\1.6.0\Device\Include --predefine="__MICROLIB SETA 1" --predefine="__UVIS
+I.\RTE\_GWTESTS1 -ID:\Software\Keil5.28\pack1\ARM\CMSIS\5.5.1\CMSIS\Core\Includ
+e -ID:\Software\Keil5.28\pack1\Keil\STM32L0xx_DFP\1.6.0\Device\Include --predef
+ine="__MICROLIB SETA 1" --predefine="__UVISION_VERSION SETA 528" --predefine="_
 
 
 
 ARM Macro Assembler    Page 7 
 
 
-ION_VERSION SETA 517" --predefine="_RTE_ SETA 1" --predefine="STM32L071xx SETA 
-1" --list=startup_stm32l071xx.lst startup_stm32l071xx.s
+RTE_ SETA 1" --predefine="STM32L071xx SETA 1" --list=startup_stm32l071xx.lst st
+artup_stm32l071xx.s
 
 
 

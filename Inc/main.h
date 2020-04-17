@@ -90,7 +90,9 @@ enum SystemStateST{
 	ConfigToolRun,
 	ConfigToolExit,
 	FactoryTestMode,
-	FactoryDebugMode
+	FactoryDebugMode,
+	TestmodeInit,
+	DebugmodeInit
 	
 };
 

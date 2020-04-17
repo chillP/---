@@ -10,13 +10,14 @@
       <TargetName>GWTESTS1</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
+      <pArmCC>5060750::V5.06 update 6 (build 750)::ARMCC</pArmCC>
       <pCCUsed>5060750::V5.06 update 6 (build 750)::ARMCC</pCCUsed>
       <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32L071CBTx</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32L0xx_DFP.2.0.1</PackID>
+          <PackID>Keil.STM32L0xx_DFP.1.6.0</PackID>
           <PackURL>http://www.keil.com/pack/</PackURL>
           <Cpu>IRAM(0x20000000-0x20004FFF) IROM(0x8000000-0x801FFFF) CLOCK(8000000) CPUTYPE("Cortex-M0+")</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -82,7 +83,7 @@
           <AfterMake>
             <RunUserProg1>1</RunUserProg1>
             <RunUserProg2>0</RunUserProg2>
-            <UserProg1Name>D:\developSoftware\MDK5\ARM\ARMCC\bin\fromelf.exe --bin -o  ..\OBJ\APP.bin  .\@L\@L.axf</UserProg1Name>
+            <UserProg1Name>$K\ARM\ARMCC\bin\fromelf.exe --bin --output=Bin\@L.bin !L</UserProg1Name>
             <UserProg2Name></UserProg2Name>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
@@ -338,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32L071xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;../Drivers/STM32L0xx_HAL_Driver/Inc;../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32L0xx/Include;../Drivers/CMSIS/Include;..\SX1301\src;..\SX1301\tst;..\SX1301\inc;..\AnalysisTool;..\ConfigTool;..\AES</IncludePath>
+              <IncludePath>../Inc;../Drivers/STM32L0xx_HAL_Driver/Inc;../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32L0xx/Include;../Drivers/CMSIS/Include;..\SX1301\src;..\SX1301\tst;..\SX1301\inc;..\AnalysisTool;..\ConfigTool;..\AES;..\GasSensorTestTool</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -691,6 +692,16 @@
               <FileName>aes.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\AES\aes.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>GasSensorTestTool</GroupName>
+          <Files>
+            <File>
+              <FileName>GasSensorTest.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\GasSensorTestTool\GasSensorTest.c</FilePath>
             </File>
           </Files>
         </Group>

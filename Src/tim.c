@@ -134,11 +134,11 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 			
 			if(j >= 1000){
 				if(SystemRunState.state == FactoryTestMode){
-					//DEBUG_Printf("ConfigTool V1.2.2 Runing \r\n");
+					DEBUG_Printf("ConfigTool V1.2.2 Runing \r\n");
 				}
 				
 				if(SystemRunState.state == FactoryDebugMode){
-					//DEBUG_Printf("AnalysisTool V3.0.0 Runing \r\n");
+					DEBUG_Printf("AnalysisTool V3.0.0 Runing \r\n");
 				}
 				j = 0;
 			}
