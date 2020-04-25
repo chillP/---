@@ -385,17 +385,9 @@ ARM Macro Assembler    Page 6
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M0+ --apcs=inter
 work --depend=gwtests1\startup_stm32l071xx.d -ogwtests1\startup_stm32l071xx.o -
-I.\RTE\_GWTESTS1 -ID:\Software\Keil5.28\pack1\ARM\CMSIS\5.5.1\CMSIS\Core\Includ
-e -ID:\Software\Keil5.28\pack1\Keil\STM32L0xx_DFP\1.6.0\Device\Include --predef
-ine="__MICROLIB SETA 1" --predefine="__UVISION_VERSION SETA 528" --predefine="_
-
-
-
-ARM Macro Assembler    Page 7 
-
-
-RTE_ SETA 1" --predefine="STM32L071xx SETA 1" --list=startup_stm32l071xx.lst st
-artup_stm32l071xx.s
+I.\RTE\_GWTESTS1 -I"D:\Useful\Keil for ARM V5.28\ARM\CMSIS\5.5.1\CMSIS\Core\Inc
+lude" --predefine="__MICROLIB SETA 1" --predefine="__UVISION_VERSION SETA 528" 
+--predefine="_RTE_ SETA 1" --list=startup_stm32l071xx.lst startup_stm32l071xx.s
 
 
 
@@ -913,4 +905,4 @@ Symbol: __main
       At line 137 in file startup_stm32l071xx.s
 Comment: __main used once
 2 symbols
-387 symbols in table
+386 symbols in table

@@ -1591,11 +1591,12 @@ Section Cross References
     gassensortest.o(i.TestMode_Init) refers to loragw_user.o(.data) for SX1301Status
     gassensortest.o(i.TestMode_Init) refers to protocol_analysis.o(.bss) for rfconfA
     gassensortest.o(i.radioDataDecode) refers to printfa.o(i.__0printf) for __2printf
-    gassensortest.o(i.radioDataDecode) refers to usart.o(i.DEBUG_Printf) for DEBUG_Printf
     gassensortest.o(i.radioDataDecode) refers to memcpya.o(.text) for __aeabi_memcpy4
     gassensortest.o(i.radioDataDecode) refers to loragw_hal.o(i.lgw_send) for lgw_send
+    gassensortest.o(i.radioDataDecode) refers to usart.o(i.DEBUG_Printf) for DEBUG_Printf
     gassensortest.o(i.radioDataDecode) refers to sx1301_rx_tx.o(.data) for nb_pkt
     gassensortest.o(i.radioDataDecode) refers to sx1301_rx_tx.o(.bss) for rxpkt
+    gassensortest.o(i.radioDataDecode) refers to gassensortest.o(.bss) for .bss
     ceil.o(i.__softfp_ceil) refers (Special) to iusefp.o(.text) for __I$use$fp
     ceil.o(i.__softfp_ceil) refers to ceil.o(i.ceil) for ceil
     ceil.o(i.ceil) refers (Special) to iusefp.o(.text) for __I$use$fp
@@ -2662,37 +2663,37 @@ Image Symbol Table
     ../Src/usart.c                           0x00000000   Number         0  usart.o ABSOLUTE
     ../clib/../cmprslib/zerorunl2.c          0x00000000   Number         0  __dczerorl2.o ABSOLUTE
     ../clib/microlib/division.c              0x00000000   Number         0  idiv.o ABSOLUTE
-    ../clib/microlib/division.c              0x00000000   Number         0  uidiv.o ABSOLUTE
     ../clib/microlib/division.c              0x00000000   Number         0  uldiv.o ABSOLUTE
     ../clib/microlib/division.c              0x00000000   Number         0  ldiv.o ABSOLUTE
+    ../clib/microlib/division.c              0x00000000   Number         0  uidiv.o ABSOLUTE
     ../clib/microlib/errno.c                 0x00000000   Number         0  errno.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry2.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8b.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7b.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry5.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry2.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10b.o ABSOLUTE
-    ../clib/microlib/longlong.c              0x00000000   Number         0  llushr.o ABSOLUTE
-    ../clib/microlib/longlong.c              0x00000000   Number         0  llsshr.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9a.o ABSOLUTE
     ../clib/microlib/longlong.c              0x00000000   Number         0  llshl.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf0.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printfb.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printfa.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf8.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf7.o ABSOLUTE
+    ../clib/microlib/longlong.c              0x00000000   Number         0  llsshr.o ABSOLUTE
+    ../clib/microlib/longlong.c              0x00000000   Number         0  llushr.o ABSOLUTE
     ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf6.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf5.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf8.o ABSOLUTE
     ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf4.o ABSOLUTE
     ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf3.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printfa.o ABSOLUTE
     ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf2.o ABSOLUTE
     ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf1.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf0.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printfb.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf5.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf7.o ABSOLUTE
     ../clib/microlib/printf/stubs.s          0x00000000   Number         0  stubs.o ABSOLUTE
     ../clib/microlib/stdio/streams.c         0x00000000   Number         0  stderr.o ABSOLUTE
     ../clib/microlib/stdio/streams.c         0x00000000   Number         0  stdout.o ABSOLUTE
@@ -2711,16 +2712,16 @@ Image Symbol Table
     ../fplib/microlib/fpadd.c                0x00000000   Number         0  dadd.o ABSOLUTE
     ../fplib/microlib/fpadd.c                0x00000000   Number         0  fadd.o ABSOLUTE
     ../fplib/microlib/fpdiv.c                0x00000000   Number         0  ddiv.o ABSOLUTE
-    ../fplib/microlib/fpepilogue.c           0x00000000   Number         0  depilogue.o ABSOLUTE
     ../fplib/microlib/fpepilogue.c           0x00000000   Number         0  fepilogue.o ABSOLUTE
+    ../fplib/microlib/fpepilogue.c           0x00000000   Number         0  depilogue.o ABSOLUTE
     ../fplib/microlib/fpfix.c                0x00000000   Number         0  dfixul.o ABSOLUTE
-    ../fplib/microlib/fpfix.c                0x00000000   Number         0  dfixi.o ABSOLUTE
-    ../fplib/microlib/fpfix.c                0x00000000   Number         0  ffixui.o ABSOLUTE
     ../fplib/microlib/fpfix.c                0x00000000   Number         0  dfixui.o ABSOLUTE
-    ../fplib/microlib/fpflt.c                0x00000000   Number         0  fflti.o ABSOLUTE
-    ../fplib/microlib/fpflt.c                0x00000000   Number         0  ffltui.o ABSOLUTE
+    ../fplib/microlib/fpfix.c                0x00000000   Number         0  ffixui.o ABSOLUTE
+    ../fplib/microlib/fpfix.c                0x00000000   Number         0  dfixi.o ABSOLUTE
     ../fplib/microlib/fpflt.c                0x00000000   Number         0  dflti.o ABSOLUTE
     ../fplib/microlib/fpflt.c                0x00000000   Number         0  dfltui.o ABSOLUTE
+    ../fplib/microlib/fpflt.c                0x00000000   Number         0  fflti.o ABSOLUTE
+    ../fplib/microlib/fpflt.c                0x00000000   Number         0  ffltui.o ABSOLUTE
     ../fplib/microlib/fpmul.c                0x00000000   Number         0  dmul.o ABSOLUTE
     ../fplib/microlib/fpscalb.c              0x00000000   Number         0  dscalb.o ABSOLUTE
     ../fplib/microlib/fpscalb.c              0x00000000   Number         0  fscalb.o ABSOLUTE
@@ -2729,8 +2730,8 @@ Image Symbol Table
     ../mathlib/dunder.c                      0x00000000   Number         0  dunder.o ABSOLUTE
     ../mathlib/fpclassify.c                  0x00000000   Number         0  fpclassify.o ABSOLUTE
     ../mathlib/poly.c                        0x00000000   Number         0  poly.o ABSOLUTE
-    ../mathlib/pow.c                         0x00000000   Number         0  pow_x.o ABSOLUTE
     ../mathlib/pow.c                         0x00000000   Number         0  pow.o ABSOLUTE
+    ../mathlib/pow.c                         0x00000000   Number         0  pow_x.o ABSOLUTE
     ../mathlib/qnan.c                        0x00000000   Number         0  qnan.o ABSOLUTE
     ../mathlib/sqrt.c                        0x00000000   Number         0  sqrt.o ABSOLUTE
     ../mathlib/sqrt.c                        0x00000000   Number         0  sqrt_x.o ABSOLUTE
@@ -2848,8 +2849,8 @@ Image Symbol Table
     .text                                    0x080007d0   Section        0  d2f.o(.text)
     .text                                    0x08000808   Section        0  llushr.o(.text)
     .text                                    0x0800082a   Section        0  llsshr.o(.text)
-    .text                                    0x08000850   Section        0  fepilogue.o(.text)
     .text                                    0x08000850   Section        0  iusefp.o(.text)
+    .text                                    0x08000850   Section        0  fepilogue.o(.text)
     .text                                    0x080008d2   Section        0  depilogue.o(.text)
     .text                                    0x08000990   Section        0  dfixul.o(.text)
     .text                                    0x080009d0   Section       40  cdrcmple.o(.text)
@@ -3106,69 +3107,69 @@ Image Symbol Table
     i.page_switch                            0x0800c44c   Section        0  loragw_reg.o(i.page_switch)
     i.pow                                    0x0800c46c   Section        0  pow.o(i.pow)
     i.radioDataDecode                        0x0800ce68   Section        0  gassensortest.o(i.radioDataDecode)
-    i.reg_r_align32                          0x0800cf80   Section        0  loragw_reg.o(i.reg_r_align32)
-    i.reg_w_align32                          0x0800d06c   Section        0  loragw_reg.o(i.reg_w_align32)
-    i.reset_sx127x                           0x0800d160   Section        0  loragw_radio.o(i.reset_sx127x)
-    i.setup_sx1272_FSK                       0x0800d21c   Section        0  loragw_radio.o(i.setup_sx1272_FSK)
-    i.setup_sx1276_FSK                       0x0800d438   Section        0  loragw_radio.o(i.setup_sx1276_FSK)
-    i.sqrt                                   0x0800d654   Section        0  sqrt.o(i.sqrt)
-    i.sx125x_read                            0x0800d69c   Section        0  loragw_radio.o(i.sx125x_read)
-    i.sx125x_write                           0x0800d798   Section        0  loragw_radio.o(i.sx125x_write)
-    i.usage                                  0x0800d888   Section        0  sx1301_rx_tx.o(i.usage)
-    i.wait_ms                                0x0800d9cc   Section        0  loragw_aux.o(i.wait_ms)
-    .constdata                               0x0800d9d4   Section      522  loragw_fpga.o(.constdata)
-    __FUNCTION__                             0x0800db9c   Data          19  loragw_fpga.o(.constdata)
-    __FUNCTION__                             0x0800dbaf   Data          15  loragw_fpga.o(.constdata)
-    __FUNCTION__                             0x0800dbbe   Data          16  loragw_fpga.o(.constdata)
-    __FUNCTION__                             0x0800dbce   Data          16  loragw_fpga.o(.constdata)
-    .constdata                               0x0800dbde   Section    24745  loragw_hal.o(.constdata)
-    arb_firmware                             0x0800dbf8   Data        8192  loragw_hal.o(.constdata)
-    agc_firmware                             0x0800fbf8   Data        8192  loragw_hal.o(.constdata)
-    cal_firmware                             0x08011bf8   Data        8192  loragw_hal.o(.constdata)
-    __FUNCTION__                             0x08013bf8   Data          14  loragw_hal.o(.constdata)
-    __FUNCTION__                             0x08013c06   Data          18  loragw_hal.o(.constdata)
-    __FUNCTION__                             0x08013c18   Data          17  loragw_hal.o(.constdata)
-    __FUNCTION__                             0x08013c29   Data          17  loragw_hal.o(.constdata)
-    __FUNCTION__                             0x08013c3a   Data          19  loragw_hal.o(.constdata)
-    __FUNCTION__                             0x08013c4d   Data          10  loragw_hal.o(.constdata)
-    __FUNCTION__                             0x08013c57   Data          12  loragw_hal.o(.constdata)
-    __FUNCTION__                             0x08013c63   Data           9  loragw_hal.o(.constdata)
-    __FUNCTION__                             0x08013c6c   Data          11  loragw_hal.o(.constdata)
-    __FUNCTION__                             0x08013c77   Data          16  loragw_hal.o(.constdata)
-    .constdata                               0x08013c87   Section       42  loragw_lbt.o(.constdata)
-    __FUNCTION__                             0x08013c87   Data          12  loragw_lbt.o(.constdata)
-    __FUNCTION__                             0x08013c93   Data          10  loragw_lbt.o(.constdata)
-    __FUNCTION__                             0x08013c9d   Data          20  loragw_lbt.o(.constdata)
-    .constdata                               0x08013cb4   Section      278  loragw_radio.o(.constdata)
-    __FUNCTION__                             0x08013d60   Data          13  loragw_radio.o(.constdata)
-    __FUNCTION__                             0x08013d6d   Data          12  loragw_radio.o(.constdata)
-    __FUNCTION__                             0x08013d79   Data          17  loragw_radio.o(.constdata)
-    __FUNCTION__                             0x08013d8a   Data          17  loragw_radio.o(.constdata)
-    __FUNCTION__                             0x08013d9b   Data          13  loragw_radio.o(.constdata)
-    __FUNCTION__                             0x08013da8   Data          17  loragw_radio.o(.constdata)
-    __FUNCTION__                             0x08013db9   Data          17  loragw_radio.o(.constdata)
-    .constdata                               0x08013dcc   Section     3960  loragw_reg.o(.constdata)
-    __FUNCTION__                             0x08014d18   Data          12  loragw_reg.o(.constdata)
-    __FUNCTION__                             0x08014d24   Data          10  loragw_reg.o(.constdata)
-    __FUNCTION__                             0x08014d2e   Data          11  loragw_reg.o(.constdata)
-    __FUNCTION__                             0x08014d39   Data          11  loragw_reg.o(.constdata)
-    .constdata                               0x08014d44   Section      730  loragw_user.o(.constdata)
-    .constdata                               0x0801501e   Section      298  protocol_analysis.o(.constdata)
-    .constdata                               0x08015148   Section       25  system_stm32l0xx.o(.constdata)
-    .constdata                               0x08015161   Section        8  system_stm32l0xx.o(.constdata)
-    .constdata                               0x08015170   Section      136  pow.o(.constdata)
-    bp                                       0x08015170   Data          16  pow.o(.constdata)
-    dp_h                                     0x08015180   Data          16  pow.o(.constdata)
-    dp_l                                     0x08015190   Data          16  pow.o(.constdata)
-    L                                        0x080151a0   Data          48  pow.o(.constdata)
-    P                                        0x080151d0   Data          40  pow.o(.constdata)
-    .constdata                               0x080151f8   Section        8  qnan.o(.constdata)
-    .conststring                             0x08015200   Section       71  sx1301_rx_tx.o(.conststring)
-    .conststring                             0x08015248   Section      181  loragw_fpga.o(.conststring)
-    .conststring                             0x08015300   Section     1450  loragw_hal.o(.conststring)
-    .conststring                             0x080158ac   Section       73  loragw_lbt.o(.conststring)
-    .conststring                             0x080158f8   Section      289  loragw_radio.o(.conststring)
-    .conststring                             0x08015a1c   Section       80  rf_rxtx_debug.o(.conststring)
+    i.reg_r_align32                          0x0800d01c   Section        0  loragw_reg.o(i.reg_r_align32)
+    i.reg_w_align32                          0x0800d108   Section        0  loragw_reg.o(i.reg_w_align32)
+    i.reset_sx127x                           0x0800d1fc   Section        0  loragw_radio.o(i.reset_sx127x)
+    i.setup_sx1272_FSK                       0x0800d2b8   Section        0  loragw_radio.o(i.setup_sx1272_FSK)
+    i.setup_sx1276_FSK                       0x0800d4d4   Section        0  loragw_radio.o(i.setup_sx1276_FSK)
+    i.sqrt                                   0x0800d6f0   Section        0  sqrt.o(i.sqrt)
+    i.sx125x_read                            0x0800d738   Section        0  loragw_radio.o(i.sx125x_read)
+    i.sx125x_write                           0x0800d834   Section        0  loragw_radio.o(i.sx125x_write)
+    i.usage                                  0x0800d924   Section        0  sx1301_rx_tx.o(i.usage)
+    i.wait_ms                                0x0800da68   Section        0  loragw_aux.o(i.wait_ms)
+    .constdata                               0x0800da70   Section      522  loragw_fpga.o(.constdata)
+    __FUNCTION__                             0x0800dc38   Data          19  loragw_fpga.o(.constdata)
+    __FUNCTION__                             0x0800dc4b   Data          15  loragw_fpga.o(.constdata)
+    __FUNCTION__                             0x0800dc5a   Data          16  loragw_fpga.o(.constdata)
+    __FUNCTION__                             0x0800dc6a   Data          16  loragw_fpga.o(.constdata)
+    .constdata                               0x0800dc7a   Section    24745  loragw_hal.o(.constdata)
+    arb_firmware                             0x0800dc94   Data        8192  loragw_hal.o(.constdata)
+    agc_firmware                             0x0800fc94   Data        8192  loragw_hal.o(.constdata)
+    cal_firmware                             0x08011c94   Data        8192  loragw_hal.o(.constdata)
+    __FUNCTION__                             0x08013c94   Data          14  loragw_hal.o(.constdata)
+    __FUNCTION__                             0x08013ca2   Data          18  loragw_hal.o(.constdata)
+    __FUNCTION__                             0x08013cb4   Data          17  loragw_hal.o(.constdata)
+    __FUNCTION__                             0x08013cc5   Data          17  loragw_hal.o(.constdata)
+    __FUNCTION__                             0x08013cd6   Data          19  loragw_hal.o(.constdata)
+    __FUNCTION__                             0x08013ce9   Data          10  loragw_hal.o(.constdata)
+    __FUNCTION__                             0x08013cf3   Data          12  loragw_hal.o(.constdata)
+    __FUNCTION__                             0x08013cff   Data           9  loragw_hal.o(.constdata)
+    __FUNCTION__                             0x08013d08   Data          11  loragw_hal.o(.constdata)
+    __FUNCTION__                             0x08013d13   Data          16  loragw_hal.o(.constdata)
+    .constdata                               0x08013d23   Section       42  loragw_lbt.o(.constdata)
+    __FUNCTION__                             0x08013d23   Data          12  loragw_lbt.o(.constdata)
+    __FUNCTION__                             0x08013d2f   Data          10  loragw_lbt.o(.constdata)
+    __FUNCTION__                             0x08013d39   Data          20  loragw_lbt.o(.constdata)
+    .constdata                               0x08013d50   Section      278  loragw_radio.o(.constdata)
+    __FUNCTION__                             0x08013dfc   Data          13  loragw_radio.o(.constdata)
+    __FUNCTION__                             0x08013e09   Data          12  loragw_radio.o(.constdata)
+    __FUNCTION__                             0x08013e15   Data          17  loragw_radio.o(.constdata)
+    __FUNCTION__                             0x08013e26   Data          17  loragw_radio.o(.constdata)
+    __FUNCTION__                             0x08013e37   Data          13  loragw_radio.o(.constdata)
+    __FUNCTION__                             0x08013e44   Data          17  loragw_radio.o(.constdata)
+    __FUNCTION__                             0x08013e55   Data          17  loragw_radio.o(.constdata)
+    .constdata                               0x08013e68   Section     3960  loragw_reg.o(.constdata)
+    __FUNCTION__                             0x08014db4   Data          12  loragw_reg.o(.constdata)
+    __FUNCTION__                             0x08014dc0   Data          10  loragw_reg.o(.constdata)
+    __FUNCTION__                             0x08014dca   Data          11  loragw_reg.o(.constdata)
+    __FUNCTION__                             0x08014dd5   Data          11  loragw_reg.o(.constdata)
+    .constdata                               0x08014de0   Section      730  loragw_user.o(.constdata)
+    .constdata                               0x080150ba   Section      298  protocol_analysis.o(.constdata)
+    .constdata                               0x080151e4   Section       25  system_stm32l0xx.o(.constdata)
+    .constdata                               0x080151fd   Section        8  system_stm32l0xx.o(.constdata)
+    .constdata                               0x08015208   Section      136  pow.o(.constdata)
+    bp                                       0x08015208   Data          16  pow.o(.constdata)
+    dp_h                                     0x08015218   Data          16  pow.o(.constdata)
+    dp_l                                     0x08015228   Data          16  pow.o(.constdata)
+    L                                        0x08015238   Data          48  pow.o(.constdata)
+    P                                        0x08015268   Data          40  pow.o(.constdata)
+    .constdata                               0x08015290   Section        8  qnan.o(.constdata)
+    .conststring                             0x08015298   Section       71  sx1301_rx_tx.o(.conststring)
+    .conststring                             0x080152e0   Section      181  loragw_fpga.o(.conststring)
+    .conststring                             0x08015398   Section     1450  loragw_hal.o(.conststring)
+    .conststring                             0x08015944   Section       73  loragw_lbt.o(.conststring)
+    .conststring                             0x08015990   Section      289  loragw_radio.o(.conststring)
+    .conststring                             0x08015ab4   Section       80  rf_rxtx_debug.o(.conststring)
     .data                                    0x20000000   Section       56  sx1301_rx_tx.o(.data)
     exit_sig                                 0x20000004   Data           4  sx1301_rx_tx.o(.data)
     quit_sig                                 0x20000008   Data           4  sx1301_rx_tx.o(.data)
@@ -3245,7 +3246,8 @@ Image Symbol Table
     .bss                                     0x200035dc   Section       88  spi.o(.bss)
     .bss                                     0x20003634   Section       60  tim.o(.bss)
     .bss                                     0x20003670   Section     1500  usart.o(.bss)
-    STACK                                    0x20003c50   Section     2560  startup_stm32l071xx.o(STACK)
+    .bss                                     0x20003c4c   Section      560  gassensortest.o(.bss)
+    STACK                                    0x20003e80   Section     2560  startup_stm32l071xx.o(STACK)
 
     Global Symbols
 
@@ -3614,37 +3616,37 @@ Image Symbol Table
     p2p_init                                 0x0800c425   Thumb Code    36  p2p.o(i.p2p_init)
     page_switch                              0x0800c44d   Thumb Code    28  loragw_reg.o(i.page_switch)
     pow                                      0x0800c46d   Thumb Code  2548  pow.o(i.pow)
-    radioDataDecode                          0x0800ce69   Thumb Code   180  gassensortest.o(i.radioDataDecode)
-    reg_r_align32                            0x0800cf81   Thumb Code   178  loragw_reg.o(i.reg_r_align32)
-    reg_w_align32                            0x0800d06d   Thumb Code   186  loragw_reg.o(i.reg_w_align32)
-    reset_sx127x                             0x0800d161   Thumb Code    86  loragw_radio.o(i.reset_sx127x)
-    setup_sx1272_FSK                         0x0800d21d   Thumb Code   434  loragw_radio.o(i.setup_sx1272_FSK)
-    setup_sx1276_FSK                         0x0800d439   Thumb Code   434  loragw_radio.o(i.setup_sx1276_FSK)
-    sqrt                                     0x0800d655   Thumb Code    66  sqrt.o(i.sqrt)
-    sx125x_read                              0x0800d69d   Thumb Code   128  loragw_radio.o(i.sx125x_read)
-    sx125x_write                             0x0800d799   Thumb Code   114  loragw_radio.o(i.sx125x_write)
-    usage                                    0x0800d889   Thumb Code    58  sx1301_rx_tx.o(i.usage)
-    wait_ms                                  0x0800d9cd   Thumb Code     8  loragw_aux.o(i.wait_ms)
-    fpga_regs                                0x0800d9d4   Data         456  loragw_fpga.o(.constdata)
-    ifmod_config                             0x0800dbde   Data          10  loragw_hal.o(.constdata)
-    lgw_version_string                       0x0800dbe8   Data          16  loragw_hal.o(.constdata)
-    sx127x_FskBandwidths                     0x08013cb8   Data         168  loragw_radio.o(.constdata)
-    FPGA_VERSION                             0x08013dcc   Data           2  loragw_reg.o(.constdata)
-    loregs                                   0x08013dd0   Data        3912  loragw_reg.o(.constdata)
-    Distab                                   0x08014d44   Data         240  loragw_user.o(.constdata)
-    LoRaWANJoinUpLinkDistab                  0x08014e34   Data         120  loragw_user.o(.constdata)
-    LoRaWANJoinDownLinkDistab                0x08014eac   Data         168  loragw_user.o(.constdata)
-    LoRaWANUpLinkDataDistab                  0x08014f54   Data         192  loragw_user.o(.constdata)
-    CTab                                     0x0801501e   Data           3  protocol_analysis.o(.constdata)
-    SetupDIDatalenTab                        0x08015022   Data         138  protocol_analysis.o(.constdata)
-    QueryDIDatalenTab                        0x080150ac   Data         126  protocol_analysis.o(.constdata)
-    SendDIDatalenTab                         0x0801512a   Data          30  protocol_analysis.o(.constdata)
-    AHBPrescTable                            0x08015148   Data          16  system_stm32l0xx.o(.constdata)
-    PLLMulTable                              0x08015158   Data           9  system_stm32l0xx.o(.constdata)
-    APBPrescTable                            0x08015161   Data           8  system_stm32l0xx.o(.constdata)
-    __mathlib_zero                           0x080151f8   Data           8  qnan.o(.constdata)
-    Region$$Table$$Base                      0x08015a6c   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x08015a8c   Number         0  anon$$obj.o(Region$$Table)
+    radioDataDecode                          0x0800ce69   Thumb Code   320  gassensortest.o(i.radioDataDecode)
+    reg_r_align32                            0x0800d01d   Thumb Code   178  loragw_reg.o(i.reg_r_align32)
+    reg_w_align32                            0x0800d109   Thumb Code   186  loragw_reg.o(i.reg_w_align32)
+    reset_sx127x                             0x0800d1fd   Thumb Code    86  loragw_radio.o(i.reset_sx127x)
+    setup_sx1272_FSK                         0x0800d2b9   Thumb Code   434  loragw_radio.o(i.setup_sx1272_FSK)
+    setup_sx1276_FSK                         0x0800d4d5   Thumb Code   434  loragw_radio.o(i.setup_sx1276_FSK)
+    sqrt                                     0x0800d6f1   Thumb Code    66  sqrt.o(i.sqrt)
+    sx125x_read                              0x0800d739   Thumb Code   128  loragw_radio.o(i.sx125x_read)
+    sx125x_write                             0x0800d835   Thumb Code   114  loragw_radio.o(i.sx125x_write)
+    usage                                    0x0800d925   Thumb Code    58  sx1301_rx_tx.o(i.usage)
+    wait_ms                                  0x0800da69   Thumb Code     8  loragw_aux.o(i.wait_ms)
+    fpga_regs                                0x0800da70   Data         456  loragw_fpga.o(.constdata)
+    ifmod_config                             0x0800dc7a   Data          10  loragw_hal.o(.constdata)
+    lgw_version_string                       0x0800dc84   Data          16  loragw_hal.o(.constdata)
+    sx127x_FskBandwidths                     0x08013d54   Data         168  loragw_radio.o(.constdata)
+    FPGA_VERSION                             0x08013e68   Data           2  loragw_reg.o(.constdata)
+    loregs                                   0x08013e6c   Data        3912  loragw_reg.o(.constdata)
+    Distab                                   0x08014de0   Data         240  loragw_user.o(.constdata)
+    LoRaWANJoinUpLinkDistab                  0x08014ed0   Data         120  loragw_user.o(.constdata)
+    LoRaWANJoinDownLinkDistab                0x08014f48   Data         168  loragw_user.o(.constdata)
+    LoRaWANUpLinkDataDistab                  0x08014ff0   Data         192  loragw_user.o(.constdata)
+    CTab                                     0x080150ba   Data           3  protocol_analysis.o(.constdata)
+    SetupDIDatalenTab                        0x080150be   Data         138  protocol_analysis.o(.constdata)
+    QueryDIDatalenTab                        0x08015148   Data         126  protocol_analysis.o(.constdata)
+    SendDIDatalenTab                         0x080151c6   Data          30  protocol_analysis.o(.constdata)
+    AHBPrescTable                            0x080151e4   Data          16  system_stm32l0xx.o(.constdata)
+    PLLMulTable                              0x080151f4   Data           9  system_stm32l0xx.o(.constdata)
+    APBPrescTable                            0x080151fd   Data           8  system_stm32l0xx.o(.constdata)
+    __mathlib_zero                           0x08015290   Data           8  qnan.o(.constdata)
+    Region$$Table$$Base                      0x08015b04   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x08015b24   Number         0  anon$$obj.o(Region$$Table)
     radio_type                               0x20000000   Data           1  sx1301_rx_tx.o(.data)
     clocksource                              0x20000001   Data           1  sx1301_rx_tx.o(.data)
     boardconf                                0x20000002   Data           2  sx1301_rx_tx.o(.data)
@@ -3715,7 +3717,8 @@ Image Symbol Table
     hdma_usart1_rx                           0x20003b74   Data          72  usart.o(.bss)
     hdma_usart2_rx                           0x20003bbc   Data          72  usart.o(.bss)
     hdma_usart2_tx                           0x20003c04   Data          72  usart.o(.bss)
-    __initial_sp                             0x20004650   Data           0  startup_stm32l071xx.o(STACK)
+    dtuInfoRecordBuf                         0x20003c4c   Data         560  gassensortest.o(.bss)
+    __initial_sp                             0x20004880   Data           0  startup_stm32l071xx.o(STACK)
 
 
 
@@ -3725,58 +3728,58 @@ Memory Map of the image
 
   Image Entry point : 0x080000c1
 
-  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00015c08, Max: 0x0001a000, ABSOLUTE, COMPRESSED[0x00015b08])
+  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00015ca0, Max: 0x0001a000, ABSOLUTE, COMPRESSED[0x00015ba0])
 
-    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00015a8c, Max: 0x0001a000, ABSOLUTE)
+    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00015b24, Max: 0x0001a000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x08000000   0x08000000   0x000000c0   Data   RO            3    RESET               startup_stm32l071xx.o
-    0x080000c0   0x080000c0   0x00000000   Code   RO         5487  * .ARM.Collect$$$$00000000  mc_p.l(entry.o)
-    0x080000c0   0x080000c0   0x00000004   Code   RO         5838    .ARM.Collect$$$$00000001  mc_p.l(entry2.o)
-    0x080000c4   0x080000c4   0x00000004   Code   RO         5841    .ARM.Collect$$$$00000004  mc_p.l(entry5.o)
-    0x080000c8   0x080000c8   0x00000000   Code   RO         5843    .ARM.Collect$$$$00000008  mc_p.l(entry7b.o)
-    0x080000c8   0x080000c8   0x00000000   Code   RO         5845    .ARM.Collect$$$$0000000A  mc_p.l(entry8b.o)
-    0x080000c8   0x080000c8   0x00000008   Code   RO         5846    .ARM.Collect$$$$0000000B  mc_p.l(entry9a.o)
-    0x080000d0   0x080000d0   0x00000000   Code   RO         5848    .ARM.Collect$$$$0000000D  mc_p.l(entry10a.o)
-    0x080000d0   0x080000d0   0x00000000   Code   RO         5850    .ARM.Collect$$$$0000000F  mc_p.l(entry11a.o)
-    0x080000d0   0x080000d0   0x00000004   Code   RO         5839    .ARM.Collect$$$$00002712  mc_p.l(entry2.o)
+    0x080000c0   0x080000c0   0x00000000   Code   RO         5490  * .ARM.Collect$$$$00000000  mc_p.l(entry.o)
+    0x080000c0   0x080000c0   0x00000004   Code   RO         5841    .ARM.Collect$$$$00000001  mc_p.l(entry2.o)
+    0x080000c4   0x080000c4   0x00000004   Code   RO         5844    .ARM.Collect$$$$00000004  mc_p.l(entry5.o)
+    0x080000c8   0x080000c8   0x00000000   Code   RO         5846    .ARM.Collect$$$$00000008  mc_p.l(entry7b.o)
+    0x080000c8   0x080000c8   0x00000000   Code   RO         5848    .ARM.Collect$$$$0000000A  mc_p.l(entry8b.o)
+    0x080000c8   0x080000c8   0x00000008   Code   RO         5849    .ARM.Collect$$$$0000000B  mc_p.l(entry9a.o)
+    0x080000d0   0x080000d0   0x00000000   Code   RO         5851    .ARM.Collect$$$$0000000D  mc_p.l(entry10a.o)
+    0x080000d0   0x080000d0   0x00000000   Code   RO         5853    .ARM.Collect$$$$0000000F  mc_p.l(entry11a.o)
+    0x080000d0   0x080000d0   0x00000004   Code   RO         5842    .ARM.Collect$$$$00002712  mc_p.l(entry2.o)
     0x080000d4   0x080000d4   0x0000001c   Code   RO            4    .text               startup_stm32l071xx.o
-    0x080000f0   0x080000f0   0x0000002c   Code   RO         5491    .text               mc_p.l(uidiv.o)
-    0x0800011c   0x0800011c   0x00000028   Code   RO         5493    .text               mc_p.l(idiv.o)
-    0x08000144   0x08000144   0x00000060   Code   RO         5495    .text               mc_p.l(uldiv.o)
-    0x080001a4   0x080001a4   0x0000004c   Code   RO         5497    .text               mc_p.l(ldiv.o)
-    0x080001f0   0x080001f0   0x00000020   Code   RO         5499    .text               mc_p.l(llshl.o)
-    0x08000210   0x08000210   0x0000000e   Code   RO         5504    .text               mc_p.l(llabs.o)
-    0x0800021e   0x0800021e   0x00000024   Code   RO         5508    .text               mc_p.l(memcpya.o)
-    0x08000242   0x08000242   0x00000024   Code   RO         5510    .text               mc_p.l(memseta.o)
-    0x08000266   0x08000266   0x00000012   Code   RO         5514    .text               mc_p.l(strcpy.o)
-    0x08000278   0x08000278   0x000000b2   Code   RO         5781    .text               mf_p.l(fadd.o)
-    0x0800032a   0x0800032a   0x00000018   Code   RO         5783    .text               mf_p.l(fscalb.o)
+    0x080000f0   0x080000f0   0x0000002c   Code   RO         5494    .text               mc_p.l(uidiv.o)
+    0x0800011c   0x0800011c   0x00000028   Code   RO         5496    .text               mc_p.l(idiv.o)
+    0x08000144   0x08000144   0x00000060   Code   RO         5498    .text               mc_p.l(uldiv.o)
+    0x080001a4   0x080001a4   0x0000004c   Code   RO         5500    .text               mc_p.l(ldiv.o)
+    0x080001f0   0x080001f0   0x00000020   Code   RO         5502    .text               mc_p.l(llshl.o)
+    0x08000210   0x08000210   0x0000000e   Code   RO         5507    .text               mc_p.l(llabs.o)
+    0x0800021e   0x0800021e   0x00000024   Code   RO         5511    .text               mc_p.l(memcpya.o)
+    0x08000242   0x08000242   0x00000024   Code   RO         5513    .text               mc_p.l(memseta.o)
+    0x08000266   0x08000266   0x00000012   Code   RO         5517    .text               mc_p.l(strcpy.o)
+    0x08000278   0x08000278   0x000000b2   Code   RO         5784    .text               mf_p.l(fadd.o)
+    0x0800032a   0x0800032a   0x00000018   Code   RO         5786    .text               mf_p.l(fscalb.o)
     0x08000342   0x08000342   0x00000002   PAD
-    0x08000344   0x08000344   0x00000164   Code   RO         5785    .text               mf_p.l(dadd.o)
-    0x080004a8   0x080004a8   0x000000d0   Code   RO         5787    .text               mf_p.l(dmul.o)
-    0x08000578   0x08000578   0x000000f0   Code   RO         5789    .text               mf_p.l(ddiv.o)
-    0x08000668   0x08000668   0x0000002c   Code   RO         5791    .text               mf_p.l(dscalb.o)
-    0x08000694   0x08000694   0x00000016   Code   RO         5793    .text               mf_p.l(fflti.o)
-    0x080006aa   0x080006aa   0x0000000e   Code   RO         5795    .text               mf_p.l(ffltui.o)
-    0x080006b8   0x080006b8   0x00000028   Code   RO         5797    .text               mf_p.l(dflti.o)
-    0x080006e0   0x080006e0   0x0000001c   Code   RO         5799    .text               mf_p.l(dfltui.o)
-    0x080006fc   0x080006fc   0x00000028   Code   RO         5801    .text               mf_p.l(ffixui.o)
-    0x08000724   0x08000724   0x00000048   Code   RO         5803    .text               mf_p.l(dfixi.o)
-    0x0800076c   0x0800076c   0x0000003c   Code   RO         5805    .text               mf_p.l(dfixui.o)
-    0x080007a8   0x080007a8   0x00000028   Code   RO         5807    .text               mf_p.l(f2d.o)
-    0x080007d0   0x080007d0   0x00000038   Code   RO         5809    .text               mf_p.l(d2f.o)
-    0x08000808   0x08000808   0x00000022   Code   RO         5853    .text               mc_p.l(llushr.o)
-    0x0800082a   0x0800082a   0x00000026   Code   RO         5855    .text               mc_p.l(llsshr.o)
-    0x08000850   0x08000850   0x00000000   Code   RO         5864    .text               mc_p.l(iusefp.o)
-    0x08000850   0x08000850   0x00000082   Code   RO         5865    .text               mf_p.l(fepilogue.o)
-    0x080008d2   0x080008d2   0x000000be   Code   RO         5867    .text               mf_p.l(depilogue.o)
-    0x08000990   0x08000990   0x00000040   Code   RO         5871    .text               mf_p.l(dfixul.o)
-    0x080009d0   0x080009d0   0x00000028   Code   RO         5873    .text               mf_p.l(cdrcmple.o)
-    0x080009f8   0x080009f8   0x00000024   Code   RO         5875    .text               mc_p.l(init.o)
-    0x08000a1c   0x08000a1c   0x000000a2   Code   RO         5877    .text               mf_p.l(dsqrt.o)
-    0x08000abe   0x08000abe   0x00000056   Code   RO         5889    .text               mc_p.l(__dczerorl2.o)
+    0x08000344   0x08000344   0x00000164   Code   RO         5788    .text               mf_p.l(dadd.o)
+    0x080004a8   0x080004a8   0x000000d0   Code   RO         5790    .text               mf_p.l(dmul.o)
+    0x08000578   0x08000578   0x000000f0   Code   RO         5792    .text               mf_p.l(ddiv.o)
+    0x08000668   0x08000668   0x0000002c   Code   RO         5794    .text               mf_p.l(dscalb.o)
+    0x08000694   0x08000694   0x00000016   Code   RO         5796    .text               mf_p.l(fflti.o)
+    0x080006aa   0x080006aa   0x0000000e   Code   RO         5798    .text               mf_p.l(ffltui.o)
+    0x080006b8   0x080006b8   0x00000028   Code   RO         5800    .text               mf_p.l(dflti.o)
+    0x080006e0   0x080006e0   0x0000001c   Code   RO         5802    .text               mf_p.l(dfltui.o)
+    0x080006fc   0x080006fc   0x00000028   Code   RO         5804    .text               mf_p.l(ffixui.o)
+    0x08000724   0x08000724   0x00000048   Code   RO         5806    .text               mf_p.l(dfixi.o)
+    0x0800076c   0x0800076c   0x0000003c   Code   RO         5808    .text               mf_p.l(dfixui.o)
+    0x080007a8   0x080007a8   0x00000028   Code   RO         5810    .text               mf_p.l(f2d.o)
+    0x080007d0   0x080007d0   0x00000038   Code   RO         5812    .text               mf_p.l(d2f.o)
+    0x08000808   0x08000808   0x00000022   Code   RO         5856    .text               mc_p.l(llushr.o)
+    0x0800082a   0x0800082a   0x00000026   Code   RO         5858    .text               mc_p.l(llsshr.o)
+    0x08000850   0x08000850   0x00000000   Code   RO         5867    .text               mc_p.l(iusefp.o)
+    0x08000850   0x08000850   0x00000082   Code   RO         5868    .text               mf_p.l(fepilogue.o)
+    0x080008d2   0x080008d2   0x000000be   Code   RO         5870    .text               mf_p.l(depilogue.o)
+    0x08000990   0x08000990   0x00000040   Code   RO         5874    .text               mf_p.l(dfixul.o)
+    0x080009d0   0x080009d0   0x00000028   Code   RO         5876    .text               mf_p.l(cdrcmple.o)
+    0x080009f8   0x080009f8   0x00000024   Code   RO         5878    .text               mc_p.l(init.o)
+    0x08000a1c   0x08000a1c   0x000000a2   Code   RO         5880    .text               mf_p.l(dsqrt.o)
+    0x08000abe   0x08000abe   0x00000056   Code   RO         5892    .text               mc_p.l(__dczerorl2.o)
     0x08000b14   0x08000b14   0x0000104c   Code   RO          720    i.AnalysisLoRaWANData  loragw_user.o
     0x08001b60   0x08001b60   0x000000b8   Code   RO          841    i.AnalysisTool_Run  analysistool.o
     0x08001c18   0x08001c18   0x00000050   Code   RO          842    i.AnalysisTool_init  analysistool.o
@@ -3945,31 +3948,31 @@ Memory Map of the image
     0x08006b00   0x08006b00   0x0000013c   Code   RO          922    i.UserVarToSX1301Var  protocol_analysis.o
     0x08006c3c   0x08006c3c   0x000001a4   Code   RO         1339    i.User_SX1301_Start  configtool.o
     0x08006de0   0x08006de0   0x00000034   Code   RO          730    i.WaiteTimeDisplay  loragw_user.o
-    0x08006e14   0x08006e14   0x0000001c   Code   RO         5750    i.__0fprintf        mc_p.l(printfa.o)
-    0x08006e30   0x08006e30   0x00000020   Code   RO         5751    i.__0printf         mc_p.l(printfa.o)
-    0x08006e50   0x08006e50   0x00000028   Code   RO         5753    i.__0sprintf        mc_p.l(printfa.o)
-    0x08006e78   0x08006e78   0x0000002c   Code   RO         5756    i.__0vsnprintf      mc_p.l(printfa.o)
-    0x08006ea4   0x08006ea4   0x0000002e   Code   RO         5869    i.__ARM_clz         mf_p.l(depilogue.o)
+    0x08006e14   0x08006e14   0x0000001c   Code   RO         5753    i.__0fprintf        mc_p.l(printfa.o)
+    0x08006e30   0x08006e30   0x00000020   Code   RO         5754    i.__0printf         mc_p.l(printfa.o)
+    0x08006e50   0x08006e50   0x00000028   Code   RO         5756    i.__0sprintf        mc_p.l(printfa.o)
+    0x08006e78   0x08006e78   0x0000002c   Code   RO         5759    i.__0vsnprintf      mc_p.l(printfa.o)
+    0x08006ea4   0x08006ea4   0x0000002e   Code   RO         5872    i.__ARM_clz         mf_p.l(depilogue.o)
     0x08006ed2   0x08006ed2   0x0000001a   Code   RO          413    i.__ARM_common_switch8  loragw_hal.o
-    0x08006eec   0x08006eec   0x0000002c   Code   RO         5825    i.__ARM_fpclassify  m_ps.l(fpclassify.o)
-    0x08006f18   0x08006f18   0x000000ac   Code   RO         5827    i.__kernel_poly     m_ps.l(poly.o)
-    0x08006fc4   0x08006fc4   0x00000014   Code   RO         5811    i.__mathlib_dbl_divzero  m_ps.l(dunder.o)
-    0x08006fd8   0x08006fd8   0x00000008   Code   RO         5813    i.__mathlib_dbl_infnan2  m_ps.l(dunder.o)
-    0x08006fe0   0x08006fe0   0x00000010   Code   RO         5814    i.__mathlib_dbl_invalid  m_ps.l(dunder.o)
-    0x08006ff0   0x08006ff0   0x00000014   Code   RO         5815    i.__mathlib_dbl_overflow  m_ps.l(dunder.o)
-    0x08007004   0x08007004   0x00000014   Code   RO         5817    i.__mathlib_dbl_underflow  m_ps.l(dunder.o)
-    0x08007018   0x08007018   0x0000000e   Code   RO         5883    i.__scatterload_copy  mc_p.l(handlers.o)
-    0x08007026   0x08007026   0x00000002   Code   RO         5884    i.__scatterload_null  mc_p.l(handlers.o)
-    0x08007028   0x08007028   0x0000000e   Code   RO         5885    i.__scatterload_zeroinit  mc_p.l(handlers.o)
+    0x08006eec   0x08006eec   0x0000002c   Code   RO         5828    i.__ARM_fpclassify  m_ps.l(fpclassify.o)
+    0x08006f18   0x08006f18   0x000000ac   Code   RO         5830    i.__kernel_poly     m_ps.l(poly.o)
+    0x08006fc4   0x08006fc4   0x00000014   Code   RO         5814    i.__mathlib_dbl_divzero  m_ps.l(dunder.o)
+    0x08006fd8   0x08006fd8   0x00000008   Code   RO         5816    i.__mathlib_dbl_infnan2  m_ps.l(dunder.o)
+    0x08006fe0   0x08006fe0   0x00000010   Code   RO         5817    i.__mathlib_dbl_invalid  m_ps.l(dunder.o)
+    0x08006ff0   0x08006ff0   0x00000014   Code   RO         5818    i.__mathlib_dbl_overflow  m_ps.l(dunder.o)
+    0x08007004   0x08007004   0x00000014   Code   RO         5820    i.__mathlib_dbl_underflow  m_ps.l(dunder.o)
+    0x08007018   0x08007018   0x0000000e   Code   RO         5886    i.__scatterload_copy  mc_p.l(handlers.o)
+    0x08007026   0x08007026   0x00000002   Code   RO         5887    i.__scatterload_null  mc_p.l(handlers.o)
+    0x08007028   0x08007028   0x0000000e   Code   RO         5888    i.__scatterload_zeroinit  mc_p.l(handlers.o)
     0x08007036   0x08007036   0x00000002   PAD
-    0x08007038   0x08007038   0x0000000c   Code   RO         5859    i.__set_errno       mc_p.l(errno.o)
-    0x08007044   0x08007044   0x00000174   Code   RO         5758    i._fp_digits        mc_p.l(printfa.o)
-    0x080071b8   0x080071b8   0x000006ec   Code   RO         5759    i._printf_core      mc_p.l(printfa.o)
-    0x080078a4   0x080078a4   0x00000020   Code   RO         5760    i._printf_post_padding  mc_p.l(printfa.o)
-    0x080078c4   0x080078c4   0x0000002c   Code   RO         5761    i._printf_pre_padding  mc_p.l(printfa.o)
-    0x080078f0   0x080078f0   0x00000016   Code   RO         5762    i._snputc           mc_p.l(printfa.o)
-    0x08007906   0x08007906   0x0000000a   Code   RO         5763    i._sputc            mc_p.l(printfa.o)
-    0x08007910   0x08007910   0x000000c8   Code   RO         5474    i.ceil              m_ps.l(ceil.o)
+    0x08007038   0x08007038   0x0000000c   Code   RO         5862    i.__set_errno       mc_p.l(errno.o)
+    0x08007044   0x08007044   0x00000174   Code   RO         5761    i._fp_digits        mc_p.l(printfa.o)
+    0x080071b8   0x080071b8   0x000006ec   Code   RO         5762    i._printf_core      mc_p.l(printfa.o)
+    0x080078a4   0x080078a4   0x00000020   Code   RO         5763    i._printf_post_padding  mc_p.l(printfa.o)
+    0x080078c4   0x080078c4   0x0000002c   Code   RO         5764    i._printf_pre_padding  mc_p.l(printfa.o)
+    0x080078f0   0x080078f0   0x00000016   Code   RO         5765    i._snputc           mc_p.l(printfa.o)
+    0x08007906   0x08007906   0x0000000a   Code   RO         5766    i._sputc            mc_p.l(printfa.o)
+    0x08007910   0x08007910   0x000000c8   Code   RO         5477    i.ceil              m_ps.l(ceil.o)
     0x080079d8   0x080079d8   0x0000001c   Code   RO          564    i.check_fpga_version  loragw_reg.o
     0x080079f4   0x080079f4   0x00000120   Code   RO         1340    i.data_forUp        configtool.o
     0x08007b14   0x08007b14   0x00000024   Code   RO         1687    i.fputc             usart.o
@@ -4018,47 +4021,47 @@ Memory Map of the image
     0x0800c378   0x0800c378   0x000000ac   Code   RO         1400    i.main              main.o
     0x0800c424   0x0800c424   0x00000028   Code   RO         1142    i.p2p_init          p2p.o
     0x0800c44c   0x0800c44c   0x00000020   Code   RO          573    i.page_switch       loragw_reg.o
-    0x0800c46c   0x0800c46c   0x000009fc   Code   RO         5478    i.pow               m_ps.l(pow.o)
-    0x0800ce68   0x0800ce68   0x00000118   Code   RO         5428    i.radioDataDecode   gassensortest.o
-    0x0800cf80   0x0800cf80   0x000000ec   Code   RO          574    i.reg_r_align32     loragw_reg.o
-    0x0800d06c   0x0800d06c   0x000000f4   Code   RO          575    i.reg_w_align32     loragw_reg.o
-    0x0800d160   0x0800d160   0x000000bc   Code   RO          490    i.reset_sx127x      loragw_radio.o
-    0x0800d21c   0x0800d21c   0x0000021c   Code   RO          491    i.setup_sx1272_FSK  loragw_radio.o
-    0x0800d438   0x0800d438   0x0000021c   Code   RO          492    i.setup_sx1276_FSK  loragw_radio.o
-    0x0800d654   0x0800d654   0x00000048   Code   RO         5831    i.sqrt              m_ps.l(sqrt.o)
-    0x0800d69c   0x0800d69c   0x000000fc   Code   RO          493    i.sx125x_read       loragw_radio.o
-    0x0800d798   0x0800d798   0x000000f0   Code   RO          494    i.sx125x_write      loragw_radio.o
-    0x0800d888   0x0800d888   0x00000144   Code   RO           13    i.usage             sx1301_rx_tx.o
-    0x0800d9cc   0x0800d9cc   0x00000008   Code   RO          214    i.wait_ms           loragw_aux.o
-    0x0800d9d4   0x0800d9d4   0x0000020a   Data   RO          250    .constdata          loragw_fpga.o
-    0x0800dbde   0x0800dbde   0x000060a9   Data   RO          310    .constdata          loragw_hal.o
-    0x08013c87   0x08013c87   0x0000002a   Data   RO          445    .constdata          loragw_lbt.o
-    0x08013cb1   0x08013cb1   0x00000003   PAD
-    0x08013cb4   0x08013cb4   0x00000116   Data   RO          495    .constdata          loragw_radio.o
-    0x08013dca   0x08013dca   0x00000002   PAD
-    0x08013dcc   0x08013dcc   0x00000f78   Data   RO          576    .constdata          loragw_reg.o
-    0x08014d44   0x08014d44   0x000002da   Data   RO          732    .constdata          loragw_user.o
-    0x0801501e   0x0801501e   0x0000012a   Data   RO          925    .constdata          protocol_analysis.o
-    0x08015148   0x08015148   0x00000019   Data   RO         5311    .constdata          system_stm32l0xx.o
-    0x08015161   0x08015161   0x00000008   Data   RO         5312    .constdata          system_stm32l0xx.o
-    0x08015169   0x08015169   0x00000007   PAD
-    0x08015170   0x08015170   0x00000088   Data   RO         5479    .constdata          m_ps.l(pow.o)
-    0x080151f8   0x080151f8   0x00000008   Data   RO         5829    .constdata          m_ps.l(qnan.o)
-    0x08015200   0x08015200   0x00000047   Data   RO           15    .conststring        sx1301_rx_tx.o
-    0x08015247   0x08015247   0x00000001   PAD
-    0x08015248   0x08015248   0x000000b5   Data   RO          251    .conststring        loragw_fpga.o
-    0x080152fd   0x080152fd   0x00000003   PAD
-    0x08015300   0x08015300   0x000005aa   Data   RO          311    .conststring        loragw_hal.o
-    0x080158aa   0x080158aa   0x00000002   PAD
-    0x080158ac   0x080158ac   0x00000049   Data   RO          446    .conststring        loragw_lbt.o
-    0x080158f5   0x080158f5   0x00000003   PAD
-    0x080158f8   0x080158f8   0x00000121   Data   RO          496    .conststring        loragw_radio.o
-    0x08015a19   0x08015a19   0x00000003   PAD
-    0x08015a1c   0x08015a1c   0x00000050   Data   RO         1027    .conststring        rf_rxtx_debug.o
-    0x08015a6c   0x08015a6c   0x00000020   Data   RO         5881    Region$$Table       anon$$obj.o
+    0x0800c46c   0x0800c46c   0x000009fc   Code   RO         5481    i.pow               m_ps.l(pow.o)
+    0x0800ce68   0x0800ce68   0x000001b4   Code   RO         5428    i.radioDataDecode   gassensortest.o
+    0x0800d01c   0x0800d01c   0x000000ec   Code   RO          574    i.reg_r_align32     loragw_reg.o
+    0x0800d108   0x0800d108   0x000000f4   Code   RO          575    i.reg_w_align32     loragw_reg.o
+    0x0800d1fc   0x0800d1fc   0x000000bc   Code   RO          490    i.reset_sx127x      loragw_radio.o
+    0x0800d2b8   0x0800d2b8   0x0000021c   Code   RO          491    i.setup_sx1272_FSK  loragw_radio.o
+    0x0800d4d4   0x0800d4d4   0x0000021c   Code   RO          492    i.setup_sx1276_FSK  loragw_radio.o
+    0x0800d6f0   0x0800d6f0   0x00000048   Code   RO         5834    i.sqrt              m_ps.l(sqrt.o)
+    0x0800d738   0x0800d738   0x000000fc   Code   RO          493    i.sx125x_read       loragw_radio.o
+    0x0800d834   0x0800d834   0x000000f0   Code   RO          494    i.sx125x_write      loragw_radio.o
+    0x0800d924   0x0800d924   0x00000144   Code   RO           13    i.usage             sx1301_rx_tx.o
+    0x0800da68   0x0800da68   0x00000008   Code   RO          214    i.wait_ms           loragw_aux.o
+    0x0800da70   0x0800da70   0x0000020a   Data   RO          250    .constdata          loragw_fpga.o
+    0x0800dc7a   0x0800dc7a   0x000060a9   Data   RO          310    .constdata          loragw_hal.o
+    0x08013d23   0x08013d23   0x0000002a   Data   RO          445    .constdata          loragw_lbt.o
+    0x08013d4d   0x08013d4d   0x00000003   PAD
+    0x08013d50   0x08013d50   0x00000116   Data   RO          495    .constdata          loragw_radio.o
+    0x08013e66   0x08013e66   0x00000002   PAD
+    0x08013e68   0x08013e68   0x00000f78   Data   RO          576    .constdata          loragw_reg.o
+    0x08014de0   0x08014de0   0x000002da   Data   RO          732    .constdata          loragw_user.o
+    0x080150ba   0x080150ba   0x0000012a   Data   RO          925    .constdata          protocol_analysis.o
+    0x080151e4   0x080151e4   0x00000019   Data   RO         5311    .constdata          system_stm32l0xx.o
+    0x080151fd   0x080151fd   0x00000008   Data   RO         5312    .constdata          system_stm32l0xx.o
+    0x08015205   0x08015205   0x00000003   PAD
+    0x08015208   0x08015208   0x00000088   Data   RO         5482    .constdata          m_ps.l(pow.o)
+    0x08015290   0x08015290   0x00000008   Data   RO         5832    .constdata          m_ps.l(qnan.o)
+    0x08015298   0x08015298   0x00000047   Data   RO           15    .conststring        sx1301_rx_tx.o
+    0x080152df   0x080152df   0x00000001   PAD
+    0x080152e0   0x080152e0   0x000000b5   Data   RO          251    .conststring        loragw_fpga.o
+    0x08015395   0x08015395   0x00000003   PAD
+    0x08015398   0x08015398   0x000005aa   Data   RO          311    .conststring        loragw_hal.o
+    0x08015942   0x08015942   0x00000002   PAD
+    0x08015944   0x08015944   0x00000049   Data   RO          446    .conststring        loragw_lbt.o
+    0x0801598d   0x0801598d   0x00000003   PAD
+    0x08015990   0x08015990   0x00000121   Data   RO          496    .conststring        loragw_radio.o
+    0x08015ab1   0x08015ab1   0x00000003   PAD
+    0x08015ab4   0x08015ab4   0x00000050   Data   RO         1027    .conststring        rf_rxtx_debug.o
+    0x08015b04   0x08015b04   0x00000020   Data   RO         5884    Region$$Table       anon$$obj.o
 
 
-    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08015a8c, Size: 0x00004650, Max: 0x00005000, ABSOLUTE, COMPRESSED[0x0000007c])
+    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08015b24, Size: 0x00004880, Max: 0x00005000, ABSOLUTE, COMPRESSED[0x0000007c])
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -4087,9 +4090,9 @@ Memory Map of the image
     0x20000166   COMPRESSED   0x00000002   PAD
     0x20000168   COMPRESSED   0x00000004   Data   RW         3788    .data               stm32l0xx_hal.o
     0x2000016c   COMPRESSED   0x00000004   Data   RW         5313    .data               system_stm32l0xx.o
-    0x20000170   COMPRESSED   0x00000004   Data   RW         5490    .data               mc_p.l(stderr.o)
-    0x20000174   COMPRESSED   0x00000004   Data   RW         5852    .data               mc_p.l(stdout.o)
-    0x20000178   COMPRESSED   0x00000004   Data   RW         5860    .data               mc_p.l(errno.o)
+    0x20000170   COMPRESSED   0x00000004   Data   RW         5493    .data               mc_p.l(stderr.o)
+    0x20000174   COMPRESSED   0x00000004   Data   RW         5855    .data               mc_p.l(stdout.o)
+    0x20000178   COMPRESSED   0x00000004   Data   RW         5863    .data               mc_p.l(errno.o)
     0x2000017c   COMPRESSED   0x00000004   PAD
     0x20000180        -       0x00000608   Zero   RW           14    .bss                sx1301_rx_tx.o
     0x20000788        -       0x0000214b   Zero   RW          309    .bss                loragw_hal.o
@@ -4106,8 +4109,9 @@ Memory Map of the image
     0x200035dc        -       0x00000058   Zero   RW         1594    .bss                spi.o
     0x20003634        -       0x0000003c   Zero   RW         1633    .bss                tim.o
     0x20003670        -       0x000005dc   Zero   RW         1688    .bss                usart.o
-    0x20003c4c   COMPRESSED   0x00000004   PAD
-    0x20003c50        -       0x00000a00   Zero   RW            1    STACK               startup_stm32l071xx.o
+    0x20003c4c        -       0x00000230   Zero   RW         5430    .bss                gassensortest.o
+    0x20003e7c   COMPRESSED   0x00000004   PAD
+    0x20003e80        -       0x00000a00   Zero   RW            1    STACK               startup_stm32l071xx.o
 
 
 ==============================================================================
@@ -4117,57 +4121,57 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-       264         50          0          1          0       1353   analysistool.o
-      1230        168          0         16       1144       6474   configtool.o
-        80         16          0          0         36       1423   crc.o
-       410         30          0         18          0       5022   ct_funtion.o
-        56          4          0          0          0        722   dma.o
-       624        180          0          0          0       3080   gassensortest.o
-       348         24          0          0          0       1948   gpio.o
-         8          0          0          0          0        482   loragw_aux.o
-      1040        618        703          0          0       5101   loragw_fpga.o
-     10494       3878      26195        177       8523      22945   loragw_hal.o
-      2696       1534        115          8         64       6431   loragw_lbt.o
-      3112       1248        567          0          0      10594   loragw_radio.o
-      2732       1430       3960         12          0      10147   loragw_reg.o
-       888        220          0          0          0       7973   loragw_spi.o
-      7842       1688        730          9       1396      19654   loragw_user.o
-       306         38          0          2          0       2468   main.o
-        40          4          0          0        264       1680   p2p.o
-       368         96          0          0          0       3539   pc_seting.o
-      4338        810        298         20        392      17036   protocol_analysis.o
-       376        104         80          0          0        842   rf_rxtx_debug.o
-       292        126          0          0         36       2049   rtc.o
-       144        108          0          0          0        486   softwareversion.o
-       152         18          0          0         88       1545   spi.o
-        28          8        192          0       2560        616   startup_stm32l071xx.o
-       144         20          0          4          0       3739   stm32l0xx_hal.o
-       144         24          0          0          0      10649   stm32l0xx_hal_cortex.o
-       124          6          0          0          0       1131   stm32l0xx_hal_crc.o
-        80          0          0          0          0       1311   stm32l0xx_hal_crc_ex.o
-       608         12          0          0          0       5497   stm32l0xx_hal_dma.o
-       410         32          0          0          0       2991   stm32l0xx_hal_gpio.o
-        24          4          0          0          0        430   stm32l0xx_hal_msp.o
-      1616         88          0          0          0       5576   stm32l0xx_hal_rcc.o
-       376         14          0          0          0       1456   stm32l0xx_hal_rcc_ex.o
-       472          8          0          0          0       4780   stm32l0xx_hal_rtc.o
-       196          0          0          0          0       1975   stm32l0xx_hal_rtc_ex.o
-       830          0          0          0          0       4741   stm32l0xx_hal_spi.o
-       808         14          0          0          0       9150   stm32l0xx_hal_tim.o
-        60          0          0          0          0       1196   stm32l0xx_hal_tim_ex.o
-      2122        104          0          0          0      14740   stm32l0xx_hal_uart.o
-         2          0          0          0          0        984   stm32l0xx_hal_uart_ex.o
-       116         30          0          0          0       4391   stm32l0xx_it.o
-       324        266         71         57       1544     386599   sx1301_rx_tx.o
-        84         18         33          4          0       1203   system_stm32l0xx.o
-         0          0          0          3          0        356   test_tool.o
-       280         28          0         16         60       2512   tim.o
-       628         68          0          2       1500       8039   usart.o
+       264         50          0          1          0       1329   analysistool.o
+      1230        168          0         16       1144       6394   configtool.o
+        80         16          0          0         36       1387   crc.o
+       410         30          0         18          0       4962   ct_funtion.o
+        56          4          0          0          0        702   dma.o
+       780        196          0          0        560       4612   gassensortest.o
+       348         24          0          0          0       1916   gpio.o
+         8          0          0          0          0        474   loragw_aux.o
+      1040        618        703          0          0       5041   loragw_fpga.o
+     10494       3878      26195        177       8523      22765   loragw_hal.o
+      2696       1534        115          8         64       6375   loragw_lbt.o
+      3112       1248        567          0          0      10494   loragw_radio.o
+      2732       1430       3960         12          0      10035   loragw_reg.o
+       888        220          0          0          0       7897   loragw_spi.o
+      7842       1688        730          9       1396      19554   loragw_user.o
+       306         38          0          2          0       2428   main.o
+        40          4          0          0        264       1656   p2p.o
+       368         96          0          0          0       3491   pc_seting.o
+      4338        810        298         20        392      16896   protocol_analysis.o
+       376        104         80          0          0        834   rf_rxtx_debug.o
+       292        126          0          0         36       2005   rtc.o
+       144        108          0          0          0        478   softwareversion.o
+       152         18          0          0         88       1513   spi.o
+        28          8        192          0       2560        608   startup_stm32l071xx.o
+       144         20          0          4          0       3683   stm32l0xx_hal.o
+       144         24          0          0          0      10605   stm32l0xx_hal_cortex.o
+       124          6          0          0          0       1115   stm32l0xx_hal_crc.o
+        80          0          0          0          0       1295   stm32l0xx_hal_crc_ex.o
+       608         12          0          0          0       5433   stm32l0xx_hal_dma.o
+       410         32          0          0          0       2951   stm32l0xx_hal_gpio.o
+        24          4          0          0          0        418   stm32l0xx_hal_msp.o
+      1616         88          0          0          0       5512   stm32l0xx_hal_rcc.o
+       376         14          0          0          0       1440   stm32l0xx_hal_rcc_ex.o
+       472          8          0          0          0       4716   stm32l0xx_hal_rtc.o
+       196          0          0          0          0       1951   stm32l0xx_hal_rtc_ex.o
+       830          0          0          0          0       4697   stm32l0xx_hal_spi.o
+       808         14          0          0          0       9014   stm32l0xx_hal_tim.o
+        60          0          0          0          0       1176   stm32l0xx_hal_tim_ex.o
+      2122        104          0          0          0      14568   stm32l0xx_hal_uart.o
+         2          0          0          0          0        964   stm32l0xx_hal_uart_ex.o
+       116         30          0          0          0       4303   stm32l0xx_it.o
+       324        266         71         57       1544     386479   sx1301_rx_tx.o
+        84         18         33          4          0       1175   system_stm32l0xx.o
+         0          0          0          3          0        348   test_tool.o
+       280         28          0         16         60       2468   tim.o
+       628         68          0          2       1500       7971   usart.o
 
     ----------------------------------------------------------------------
-     47342      13136      33000        368      17616     607056   Object Totals
+     47498      13152      32996        368      18176     606128   Object Totals
          0          0         32          0          0          0   (incl. Generated)
-        26          0         24         19          9          0   (incl. Padding)
+        26          0         20         19          9          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
@@ -4250,15 +4254,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     55572      13566      33144        380      17620     600028   Grand Totals
-     55572      13566      33144        124      17620     600028   ELF Image Totals (compressed)
-     55572      13566      33144        124          0          0   ROM Totals
+     55728      13582      33140        380      18180     599100   Grand Totals
+     55728      13582      33140        124      18180     599100   ELF Image Totals (compressed)
+     55728      13582      33140        124          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                88716 (  86.64kB)
-    Total RW  Size (RW Data + ZI Data)             18000 (  17.58kB)
-    Total ROM Size (Code + RO Data + RW Data)      88840 (  86.76kB)
+    Total RO  Size (Code + RO Data)                88868 (  86.79kB)
+    Total RW  Size (RW Data + ZI Data)             18560 (  18.13kB)
+    Total ROM Size (Code + RO Data + RW Data)      88992 (  86.91kB)
 
 ==============================================================================
 

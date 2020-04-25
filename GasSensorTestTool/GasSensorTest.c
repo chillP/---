@@ -13,10 +13,22 @@ extern struct SX1301Status_S SX1301Status;
 extern struct lgw_conf_rxrf_s *rfAp;
 extern struct lgw_conf_rxrf_s *rfBp;
 extern struct lgw_conf_rxif_s *prxifms;
-extern	struct lgw_conf_rxif_s ifconfm[8];
-extern	struct lgw_conf_rxrf_s rfconfA,rfconfB;
-extern	struct lgw_pkt_rx_s rxpkt[4]; 
+extern struct lgw_conf_rxif_s ifconfm[8];
+extern struct lgw_conf_rxrf_s rfconfA,rfconfB;
+extern struct lgw_pkt_rx_s rxpkt[4]; 
 extern int nb_pkt;
+
+typedef struct  
+{  
+	uint8_t deveui[8];  //DTU设备号记录
+	float rssiDTU;  //节点RSSI
+	float rssiGW;  //网关侧RSSI
+	float snrDTU;  //节点侧SNR
+	float snrGW;  //网关侧SNR
+	uint8_t lifeCycle  //数据生命周期
+}DTU_INFO_TYPE;
+
+DTU_INFO_TYPE dtuInfoRecordBuf[20];
 
 /**
  * @brief   霍尼DTU模拟网关 - 测试模式初始化
@@ -173,7 +185,7 @@ void radioDataDecode(void)
 	uint8_t send_access_flag=1;
 	uint8_t logLevel = 2;
 	bool frameCheckOk = true;
-	uint8_t i=0;
+	uint8_t i,j=0;
 	
 	struct lgw_pkt_tx_s tx_packet;
 	
@@ -184,7 +196,28 @@ void radioDataDecode(void)
 		{
 			if(rxpkt[0].payload[2]==0x01)  //控制码：握手包
 			{
-				
+				//信息登记
+				for(i=0;i<20;i++)  //DTU信息活动存储区
+				{
+					if(dtuInfoRecordBuf[j].deveui != NULL)  //检索空闲存储区 #如何确保deveui存储的唯一性？
+					{
+						for(j=0;j<8;j++)  //存储DEVEUI
+						{
+							dtuInfoRecordBuf[j].deveui[j] = rxpkt[0].payload[i+3];  
+						}
+						dtuInfoRecordBuf[j].lifeCycle = 20;  //设定生命周期
+					}
+				}
+				//握手包发送
+				for(i=0;i<8;i++)  //下行包EUI即上行包中EUI
+				{
+					handShakeAcp[i+3]=rxpkt[0].payload[i+3];
+				}
+				for(i=0;i<12;i++)  //TXPacket赋值
+				{
+					tx_packet.payload[i] = handShakeAcp[i];
+				}
+				lgw_send(tx_packet);
 			}
 			else if(rxpkt[0].payload[2]==0xF1)  //控制码：测试包1
 			{

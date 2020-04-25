@@ -3,11 +3,11 @@
 <title>Static Call Graph - [GWTESTS1\GWTESTS1.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image GWTESTS1\GWTESTS1.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Sat Apr 25 23:12:02 2020
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Sun Apr 26 00:32:12 2020
 <BR><P>
-<H3>Maximum Stack Usage =       1056 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
+<H3>Maximum Stack Usage =       1072 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
-main &rArr; ConfigTool_Run &rArr; LoRaSend &rArr; lgw_send &rArr; lbt_is_channel_free &rArr; lgw_time_on_air &rArr; pow &rArr; __kernel_poly &rArr; __aeabi_dmul &rArr; _double_epilogue &rArr; __aeabi_llsl
+main &rArr; FactoryTestMode_Run &rArr; radioDataDecode &rArr; lgw_send &rArr; lbt_is_channel_free &rArr; lgw_time_on_air &rArr; pow &rArr; __kernel_poly &rArr; __aeabi_dmul &rArr; _double_epilogue &rArr; __aeabi_llsl
 <P>
 <H3>
 Mutually Recursive functions
@@ -752,7 +752,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[75]"></a>FactoryTestMode_Run</STRONG> (Thumb, 80 bytes, Stack size 8 bytes, gassensortest.o(i.FactoryTestMode_Run))
-<BR><BR>[Stack]<UL><LI>Max Depth = 1040<LI>Call Chain = FactoryTestMode_Run &rArr; radioDataDecode &rArr; lgw_send &rArr; lbt_is_channel_free &rArr; lgw_time_on_air &rArr; pow &rArr; __kernel_poly &rArr; __aeabi_dmul &rArr; _double_epilogue &rArr; __aeabi_llsl
+<BR><BR>[Stack]<UL><LI>Max Depth = 1072<LI>Call Chain = FactoryTestMode_Run &rArr; radioDataDecode &rArr; lgw_send &rArr; lbt_is_channel_free &rArr; lgw_time_on_air &rArr; pow &rArr; __kernel_poly &rArr; __aeabi_dmul &rArr; _double_epilogue &rArr; __aeabi_llsl
 </UL>
 <BR>[Calls]<UL><LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SX1301Start
 <LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SX1301RXDataQueryPin
@@ -2488,7 +2488,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[22]"></a>main</STRONG> (Thumb, 154 bytes, Stack size 0 bytes, main.o(i.main))
-<BR><BR>[Stack]<UL><LI>Max Depth = 1056<LI>Call Chain = main &rArr; ConfigTool_Run &rArr; LoRaSend &rArr; lgw_send &rArr; lbt_is_channel_free &rArr; lgw_time_on_air &rArr; pow &rArr; __kernel_poly &rArr; __aeabi_dmul &rArr; _double_epilogue &rArr; __aeabi_llsl
+<BR><BR>[Stack]<UL><LI>Max Depth = 1072<LI>Call Chain = main &rArr; FactoryTestMode_Run &rArr; radioDataDecode &rArr; lgw_send &rArr; lbt_is_channel_free &rArr; lgw_time_on_air &rArr; pow &rArr; __kernel_poly &rArr; __aeabi_dmul &rArr; _double_epilogue &rArr; __aeabi_llsl
 </UL>
 <BR>[Calls]<UL><LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_common_switch8
 <LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ConfigTool_Run
@@ -2556,8 +2556,8 @@ Global Symbols
 <LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lgw_receive
 </UL>
 
-<P><STRONG><a name="[76]"></a>radioDataDecode</STRONG> (Thumb, 180 bytes, Stack size 568 bytes, gassensortest.o(i.radioDataDecode))
-<BR><BR>[Stack]<UL><LI>Max Depth = 1032<LI>Call Chain = radioDataDecode &rArr; lgw_send &rArr; lbt_is_channel_free &rArr; lgw_time_on_air &rArr; pow &rArr; __kernel_poly &rArr; __aeabi_dmul &rArr; _double_epilogue &rArr; __aeabi_llsl
+<P><STRONG><a name="[76]"></a>radioDataDecode</STRONG> (Thumb, 320 bytes, Stack size 600 bytes, gassensortest.o(i.radioDataDecode))
+<BR><BR>[Stack]<UL><LI>Max Depth = 1064<LI>Call Chain = radioDataDecode &rArr; lgw_send &rArr; lbt_is_channel_free &rArr; lgw_time_on_air &rArr; pow &rArr; __kernel_poly &rArr; __aeabi_dmul &rArr; _double_epilogue &rArr; __aeabi_llsl
 </UL>
 <BR>[Calls]<UL><LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lgw_send
 <LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DEBUG_Printf
