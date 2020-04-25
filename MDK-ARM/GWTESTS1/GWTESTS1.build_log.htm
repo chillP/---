@@ -22,13 +22,30 @@ Dialog DLL:      TARMCM1.DLL V1.14.1.0
  
 <h2>Project:</h2>
 G:\工作\燃气检测软件\模拟网关软件\V1.0.0\MDK-ARM\GWTESTS1.uvprojx
-Project File Date:  04/17/2020
+Project File Date:  04/20/2020
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'D:\Software\Keil5.28\ARM\ARMCC\Bin'
 Build target 'GWTESTS1'
+compiling GasSensorTest.c...
+..\GasSensorTestTool\GasSensorTest.h(13): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\GasSensorTestTool\GasSensorTest.c(170): warning:  #177-D: variable "testData"  was declared but never referenced
+  	uint8_t testData[10]={0x00,0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08};
+..\GasSensorTestTool\GasSensorTest.c(171): warning:  #177-D: variable "handShakeAcp"  was declared but never referenced
+  	uint8_t handShakeAcp[12]={0xC8,0xDF,0x01,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};  //2字节帧头+1字节控制码+8字节DEVEUI
+..\GasSensorTestTool\GasSensorTest.c(172): warning:  #177-D: variable "frameFaultFlag"  was declared but never referenced
+  	uint8_t frameFaultFlag=0;
+..\GasSensorTestTool\GasSensorTest.c(176): warning:  #177-D: variable "i"  was declared but never referenced
+  	uint8_t i=0;
+..\GasSensorTestTool\GasSensorTest.c(250): warning:  #1-D: last line of file ends without a newline
+  	
+..\GasSensorTestTool\GasSensorTest.c: 6 warnings, 0 errors
+linking...
+Program Size: Code=55592 RO-data=33140 RW-data=380 ZI-data=17620  
+FromELF: creating hex file...
 After Build - User command #1: D:\Software\Keil5.28\\ARM\ARMCC\bin\fromelf.exe --bin --output=Bin\GWTESTS1.bin GWTESTS1\GWTESTS1.axf
-"GWTESTS1\GWTESTS1.axf" - 0 Error(s), 0 Warning(s).
+"GWTESTS1\GWTESTS1.axf" - 0 Error(s), 6 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -51,7 +68,7 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.2.0
-Build Time Elapsed:  00:00:00
+Build Time Elapsed:  00:00:02
 </pre>
 </body>
 </html>

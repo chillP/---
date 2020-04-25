@@ -7,7 +7,7 @@ void TestMode_Init(void);
 void DebugMode_Init(void);
 void FactoryTestMode_Run(void);
 void FactoryDebugMode_Run(void);
-
-
+void radioDataDecode(void);
+void serialDataDecode(void);
 
 #endif

@@ -143,7 +143,7 @@ int main(void)
 	//AnalysisTool_init();
 	SystemRunState.state = TestmodeInit;
 	
-	//ConfigTool_Init();
+	ConfigTool_Init();
 
 	
   /* USER CODE END 2 */

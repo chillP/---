@@ -15,6 +15,8 @@ extern struct lgw_conf_rxrf_s *rfBp;
 extern struct lgw_conf_rxif_s *prxifms;
 extern	struct lgw_conf_rxif_s ifconfm[8];
 extern	struct lgw_conf_rxrf_s rfconfA,rfconfB;
+extern	struct lgw_pkt_rx_s rxpkt[4]; 
+extern int nb_pkt;
 
 /**
  * @brief   霍尼DTU模拟网关 - 测试模式初始化
@@ -87,7 +89,7 @@ void TestMode_Init(void)
     ifconfm[7].freq_hz = 300000;
     ifconfm[7].datarate = DR_LORA_MULTI;
 	
-	SystemParameter.LoRaMAC = 1;	
+	SystemParameter.LoRaMAC = 0;	
 	
 	//1301启动标志
 	lgw_stop();
@@ -130,13 +132,20 @@ void FactoryTestMode_Run(void)
 			Sx1301StartSucces();//IO指示
 		}		
 	}
-	//启动成功开始接受
-	if(SX1301Status.StartSuccesFlag == 0)
+	
+	//射频数据接受
+	if(SX1301Status.StartSuccesFlag == 1)
 	{
 		SX1301RXDataQueryPin();//使用这个需要开启SX1301的特殊功能引脚的指示
-		DEBUG_Printf("Test mode runnning!!!\r\n");
-		HAL_Delay(1000);
+		//DEBUG_Printf("Test mode runnning!!!\r\n");
+		//HAL_Delay(1000);
 	}
+	
+	//射频数据处理
+	radioDataDecode();
+	
+	//串口指令处理
+	serialDataDecode();
 }
 
 /**
@@ -146,6 +155,95 @@ void FactoryTestMode_Run(void)
  * @return  无
  */
 void FactoryDebugMode_Run(void)
+{
+	
+}
+
+/**
+ * @brief   射频数据解析
+ * @details 解析1301收到的数据，执行对应的处理
+ * @param   无
+ * @return  无
+ */
+void radioDataDecode(void)
+{
+	uint8_t testData[10]={0x00,0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08};
+	uint8_t handShakeAcp[12]={0xC8,0xDF,0x01,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};  //2字节帧头+1字节控制码+8字节DEVEUI
+	uint8_t frameFaultFlag=0;
+	uint8_t send_access_flag=1;
+	uint8_t logLevel = 2;
+	bool frameCheckOk = true;
+	uint8_t i=0;
+	
+	struct lgw_pkt_tx_s tx_packet;
+	
+	if(nb_pkt!=0)
+	{
+		//帧校验
+		if(rxpkt[0].payload[0]==0xE4 && rxpkt[0].payload[1]==0xFB)  //帧头
+		{
+			if(rxpkt[0].payload[2]==0x01)  //控制码
+			{
+				if(logLevel == 2) printf("Frame check ok\r\n");
+			}
+			else
+			{
+				if(logLevel == 2) printf("Ctrl bit check error\r\n");
+				frameCheckOk = false;	
+			}
+		}
+		else
+		{
+			if(logLevel == 2) printf("Frame head check error\r\n");
+			frameCheckOk = false;	
+		}
+		
+		//DEVEUI记录
+		for(uint8_t i=0;i<9;i++)
+		{
+			//if(rxpkt[0].payload[i] != testData[i])
+	
+		}
+		
+		//数据包发送
+		if(frameCheckOk)
+		{
+			DEBUG_Printf("Send packet: ");
+			
+			for(uint8_t i=0;i<9;i++)
+			{
+				tx_packet.payload[i] = 9-i;
+			}
+		
+			tx_packet.bandwidth		= 	BW_125KHZ;
+			tx_packet.coderate		 =	 CR_LORA_4_5;
+			tx_packet.datarate 		= 	DR_LORA_SF7;
+			tx_packet.freq_hz 		= 	(uint32_t)(488.3*1e6);
+			tx_packet.modulation	 	= 	MOD_LORA;
+			tx_packet.no_crc 			= 	false;
+			tx_packet.preamble		 = 	8;
+			tx_packet.rf_chain		 = 	0;
+			tx_packet.rf_power		 = 	10;
+			tx_packet.tx_mode		 = 	IMMEDIATE;
+			tx_packet.size 			 =	9;	
+			send_access_flag = lgw_send(tx_packet);
+			
+			DEBUG_Printf("Send packet: %d\r\n",send_access_flag);
+		}
+		
+		
+		
+		
+	}
+}
+
+/**
+ * @brief   串口数据解析
+ * @details 解析上位机串口的AT指令，执行对应的处理
+ * @param   无
+ * @return  无
+ */
+void serialDataDecode(void)
 {
 	
 }

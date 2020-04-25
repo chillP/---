@@ -725,17 +725,26 @@ uint8_t SX1301RXData()
 		{
 			//RFRXLedOn();					
 			//RTC_TimeShow();
-		p = &rxpkt[i];
+			p = &rxpkt[i];
+				
+			//CT_Command_Parsing(p);
 			
-		CT_Command_Parsing(p);
-		
-		abstime = abs( p->count_us - lasttime);
-		absRSSI = abs(p->rssi -lastRSSI);
-		abssize = abs(p->size - lastsize);
-		lasttime =  p->count_us;
-		lastRSSI = p->rssi;		
-		lastsize = p->size ;
-		datacount = 0;//清零发送缓存
+			abstime = abs( p->count_us - lasttime);
+			absRSSI = abs(p->rssi -lastRSSI);
+			abssize = abs(p->size - lastsize);
+			lasttime =  p->count_us;
+			lastRSSI = p->rssi;		
+			lastsize = p->size ;
+			datacount = 0;//清零发送缓存
+			
+			DEBUG_Printf("lora payload: ");	
+
+			for (uint8_t j = 0; j < p->size; ++j) 
+			{
+				DEBUG_Printf("%02X ", p->payload[j]);
+			}
+			DEBUG_Printf(" #\r\n");
+			DEBUG_Printf("RSSI: %.2f SNR: %.2f\r\n",rxpkt[i].rssi,rxpkt[i].snr);
 		
 			
 //测试灵敏度
@@ -814,182 +823,182 @@ uint8_t SX1301RXData()
 #endif
 			
 
-		//CRC输出过滤
-		//输出数据给用户
-		
-		if(((SystemParameter.ReceiveCRC & REC_CRC)&& (p->status == STAT_CRC_OK))||//CRC OK
-			((SystemParameter.ReceiveCRC & REC_NO_CRC)&&(p->status == STAT_NO_CRC))||// NO CRC
-		((SystemParameter.ReceiveCRC &  REC_ERROR_CRC)&&(p->status == STAT_CRC_BAD)))//CRC BAD
-		{
-			//CRC校验成功
-			//初始化
-			//memset(fw_check, 0, 500);
-			//组帧
-			RFRXData[datacount++] = 0xfe;
-			RFRXData[datacount++] = 0xfe;
-			RFRXData[datacount++] = 0x68;
-			RFRXData[datacount++] = RX_C;//接收数据控制码
-			//RFRXData[datacount++] = 0x68;//
-			RFRXData[datacount++] = 0x00;//接收数据数据标识
-			temp16 = p->size + 16;
-			RFRXData[datacount++] = temp16/256;//接收数据数据域长度高8位
-			RFRXData[datacount++] = temp16%256;//接收数据数据域长度低8位
-			RFRXData[datacount++] = p->if_chain;
-			switch (p->datarate) 
-			{
-				case DR_LORA_SF7: 
-				temp = 7;
-				break;
-				case DR_LORA_SF8:
-				temp = 8;
-				break;
-				case DR_LORA_SF9: 
-				temp = 9;
-				break;
-				case DR_LORA_SF10: 
-				temp = 10;
-				break;
-				case DR_LORA_SF11:
-				temp = 11;
-				break;
-				case DR_LORA_SF12: 
-				temp = 12;
-				break;
-				default: 
-				temp = 0xff;
-			}
-			RFRXData[datacount++] = temp;
-			RFRXData[datacount++] = p->size;
-			switch (p->coderate) 
-			{
-				case CR_LORA_4_5:  temp = 5;
-						break;
-				case CR_LORA_4_6: temp = 6; 
-						break;
-				case CR_LORA_4_7: temp = 7;
-						break;
-				case CR_LORA_4_8:  temp = 8;
-						break;
-				default: ;//printf(" coderate?");							
-			}
-			RFRXData[datacount++] =temp;
+			//CRC输出过滤
+			//输出数据给用户
 			
-			//SNR
-			if(p->snr < 0)
+			if(((SystemParameter.ReceiveCRC & REC_CRC)&& (p->status == STAT_CRC_OK))||//CRC OK
+				((SystemParameter.ReceiveCRC & REC_NO_CRC)&&(p->status == STAT_NO_CRC))||// NO CRC
+			((SystemParameter.ReceiveCRC &  REC_ERROR_CRC)&&(p->status == STAT_CRC_BAD)))//CRC BAD
 			{
-				RFRXData[datacount++] = 0x80|(uint8_t)(-(p->snr));	
-			}
-			else
-			{
-				RFRXData[datacount++] = (uint8_t)(p->snr);
-			}
-			
-			//SNR min
-			if(p->snr_min < 0)
-			{
-				RFRXData[datacount++] =  0x80|(uint8_t)(-( p->snr_min));	
-			}
-			else
-			{
-				RFRXData[datacount++] = (uint8_t)( p->snr_min);	
-			}
-			
-			//SNR max
-			if(p->snr_max < 0)
-			{
-				RFRXData[datacount++] = 0x80|((uint8_t)(-( p->snr_max)));	
-			}
-			else
-			{
-				RFRXData[datacount++] = (uint8_t)( p->snr_max);	
-			}
-			
-			//RSSI
-			if(p->rssi < 0)
-			{
-				RFRXData[datacount++] =  0x80|((uint8_t)(-(p->rssi)));
-			}
-			else
-			{
-				RFRXData[datacount++] = 0;
-			}
-			
-			//时间戳		
-			RFRXData[datacount++] =   (uint8_t)(p->count_us>>24);		
-			RFRXData[datacount++] =  (uint8_t)( (p->count_us & 0x00ff0000)>>16);
-			RFRXData[datacount++] =  (uint8_t)( (p->count_us & 0x0000ff00)>>8);
-			RFRXData[datacount++] =  (uint8_t) (p->count_us & 0x000000ff);
-			
-			//CRC校验
-			if(p->status == STAT_CRC_OK)
-			{
-				RFRXData[datacount++] =   (uint8_t)(p->crc>>8);
-				RFRXData[datacount++] =   (uint8_t)(p->crc & 0x00ff);
-			}
-			else
-			{
-				RFRXData[datacount++] =   0;
-				RFRXData[datacount++] =   0;
-			}
-			
-			//保留
-			RFRXData[datacount++] =  0x00;
-			RFRXData[datacount++] =  0x00;
-			
-			//payload
-			for(uint8_t i=0; i< p->size; i++)
-			{
-				RFRXData[datacount++] =   p->payload[i];
-			}
-
-			//CS
-			RFRXData[datacount] = 0;
-			for(uint16_t j = 2; j<datacount; j++)
-			{
-				RFRXData[datacount] += RFRXData[j];
-			}
-			datacount++;
-			RFRXData[datacount++] = 0x16;
-
-			//发送数据要从OUTPUTINDEX开始
-			if(MCUTXData.BusyFlag == 0)
-			{
-				
-			}
-			else
-			{
-				while(MCUTXData.BusyFlag == 1)
+				//CRC校验成功
+				//初始化
+				//memset(fw_check, 0, 500);
+				//组帧
+				RFRXData[datacount++] = 0xfe;
+				RFRXData[datacount++] = 0xfe;
+				RFRXData[datacount++] = 0x68;
+				RFRXData[datacount++] = RX_C;//接收数据控制码
+				//RFRXData[datacount++] = 0x68;//
+				RFRXData[datacount++] = 0x00;//接收数据数据标识
+				temp16 = p->size + 16;
+				RFRXData[datacount++] = temp16/256;//接收数据数据域长度高8位
+				RFRXData[datacount++] = temp16%256;//接收数据数据域长度低8位
+				RFRXData[datacount++] = p->if_chain;
+				switch (p->datarate) 
 				{
-					uint8_t temp;
-					HAL_Delay(10);
-					if(temp++>15)
+					case DR_LORA_SF7: 
+					temp = 7;
+					break;
+					case DR_LORA_SF8:
+					temp = 8;
+					break;
+					case DR_LORA_SF9: 
+					temp = 9;
+					break;
+					case DR_LORA_SF10: 
+					temp = 10;
+					break;
+					case DR_LORA_SF11:
+					temp = 11;
+					break;
+					case DR_LORA_SF12: 
+					temp = 12;
+					break;
+					default: 
+					temp = 0xff;
+				}
+				RFRXData[datacount++] = temp;
+				RFRXData[datacount++] = p->size;
+				switch (p->coderate) 
+				{
+					case CR_LORA_4_5:  temp = 5;
+							break;
+					case CR_LORA_4_6: temp = 6; 
+							break;
+					case CR_LORA_4_7: temp = 7;
+							break;
+					case CR_LORA_4_8:  temp = 8;
+							break;
+					default: ;//printf(" coderate?");							
+				}
+				RFRXData[datacount++] =temp;
+				
+				//SNR
+				if(p->snr < 0)
+				{
+					RFRXData[datacount++] = 0x80|(uint8_t)(-(p->snr));	
+				}
+				else
+				{
+					RFRXData[datacount++] = (uint8_t)(p->snr);
+				}
+				
+				//SNR min
+				if(p->snr_min < 0)
+				{
+					RFRXData[datacount++] =  0x80|(uint8_t)(-( p->snr_min));	
+				}
+				else
+				{
+					RFRXData[datacount++] = (uint8_t)( p->snr_min);	
+				}
+				
+				//SNR max
+				if(p->snr_max < 0)
+				{
+					RFRXData[datacount++] = 0x80|((uint8_t)(-( p->snr_max)));	
+				}
+				else
+				{
+					RFRXData[datacount++] = (uint8_t)( p->snr_max);	
+				}
+				
+				//RSSI
+				if(p->rssi < 0)
+				{
+					RFRXData[datacount++] =  0x80|((uint8_t)(-(p->rssi)));
+				}
+				else
+				{
+					RFRXData[datacount++] = 0;
+				}
+				
+				//时间戳		
+				RFRXData[datacount++] =   (uint8_t)(p->count_us>>24);		
+				RFRXData[datacount++] =  (uint8_t)( (p->count_us & 0x00ff0000)>>16);
+				RFRXData[datacount++] =  (uint8_t)( (p->count_us & 0x0000ff00)>>8);
+				RFRXData[datacount++] =  (uint8_t) (p->count_us & 0x000000ff);
+				
+				//CRC校验
+				if(p->status == STAT_CRC_OK)
+				{
+					RFRXData[datacount++] =   (uint8_t)(p->crc>>8);
+					RFRXData[datacount++] =   (uint8_t)(p->crc & 0x00ff);
+				}
+				else
+				{
+					RFRXData[datacount++] =   0;
+					RFRXData[datacount++] =   0;
+				}
+				
+				//保留
+				RFRXData[datacount++] =  0x00;
+				RFRXData[datacount++] =  0x00;
+				
+				//payload
+				for(uint8_t i=0; i< p->size; i++)
+				{
+					RFRXData[datacount++] =   p->payload[i];
+				}
+
+				//CS
+				RFRXData[datacount] = 0;
+				for(uint16_t j = 2; j<datacount; j++)
+				{
+					RFRXData[datacount] += RFRXData[j];
+				}
+				datacount++;
+				RFRXData[datacount++] = 0x16;
+
+				//发送数据要从OUTPUTINDEX开始
+				if(MCUTXData.BusyFlag == 0)
+				{
+					
+				}
+				else
+				{
+					while(MCUTXData.BusyFlag == 1)
 					{
-						break;
-					}
-				}				
-			}
+						uint8_t temp;
+						HAL_Delay(10);
+						if(temp++>15)
+						{
+							break;
+						}
+					}				
+				}
+				
+				//HAL_UART_Transmit(&huart2,RFRXData,datacount,500);
+				//Usart1SendData_DMA(RFRXData, datacount);
 			
-			//HAL_UART_Transmit(&huart2,RFRXData,datacount,500);
-			//Usart1SendData_DMA(RFRXData, datacount);
-			
-			//新数据起始 接收包技计数
+				//新数据起始 接收包技计数
 #ifdef DebugDisplayRxCnt
-			SystemParameter.RxCnt += nb_pkt;
-			printf(">>>\\r\n Rcv pkt %ld >>\r\n", SystemParameter.RxCnt);
+				SystemParameter.RxCnt += nb_pkt;
+				printf(">>>\\r\n Rcv pkt %ld >>\r\n", SystemParameter.RxCnt);
 #endif
-			// cyw 20190923
-			printf(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\r\n");
-			//打印时间戳
+				// cyw 20190923
+				printf(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\r\n");
+				//打印时间戳
 #ifdef DebugDisplayTimestramp
-			if(LastRxdataTimestamp > p->count_us)
-			{
-				printf("timestamp:%010u timestamp error\n", p->count_us);
-			}
-			else
-			{				
-				printf("timestamp:%010u lasttime:%010u now-last:%010u\r\n", p->count_us,LastRxdataTimestamp,p->count_us-LastRxdataTimestamp);
-			}
-			LastRxdataTimestamp = p->count_us;
+				if(LastRxdataTimestamp > p->count_us)
+				{
+					printf("timestamp:%010u timestamp error\n", p->count_us);
+				}
+				else
+				{				
+					printf("timestamp:%010u lasttime:%010u now-last:%010u\r\n", p->count_us,LastRxdataTimestamp,p->count_us-LastRxdataTimestamp);
+				}
+				LastRxdataTimestamp = p->count_us;
 			
 #endif		
 
@@ -1044,90 +1053,87 @@ uint8_t SX1301RXData()
 			}
 #endif	
 
-			//打印表格射频接收数据精简版
+				//打印表格射频接收数据精简版
 #ifdef DebugDisplayTabStringSimple
-			DispalyTabStringSimple();
+				DispalyTabStringSimple();
 #endif			
 			
 			
-			//打印表格射频接收数据
+				//打印表格射频接收数据
 #ifdef DebugDisplayTabString
-			DispalyTabString();
+				DispalyTabString();
 #endif
 			
 			
 
 									//解析LoRaWAN数据
 #ifdef DebugDisplayAnalyLoRaWAN
-			AnalysisLoRaWANData();		
+				AnalysisLoRaWANData();		
 #endif
 
 						//输出打印串口发送数据帧
 #ifdef DebugDisplayToUserRFData
-			printf("TO user data:\n");
-			for(uint16_t k = 0;k<datacount;k++)
-			{
-				printf(" %02X", RFRXData[k]);
-			}
-			printf(" #\n");
+				printf("TO user data:\n");
+				for(uint16_t k = 0;k<datacount;k++)
+				{
+					printf(" %02X", RFRXData[k]);
+				}
+				printf(" #\n");
 #endif
 
 			//打印payload
 #ifdef DebugDisplayLoraPayload
-			printf("lora payload:\n");	
+				printf("lora payload:\n");	
 
-			for (uint8_t j = 0; j < p->size; ++j) 
+				for (uint8_t j = 0; j < p->size; ++j) 
+				{
+					printf(" %02X", p->payload[j]);
+				}
+				printf(" #\n");
+#endif
+
+				// cyw 20190923
+				printf("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\r\n");
+					//HAL_Delay(3);//用于断帧	
+				
+				}
+			else
 			{
-			printf(" %02X", p->payload[j]);
+				//printf("CRC is unknow,setup crc is %d,data crc is %d\n",SystemParameter.ReceiveCRC,p->status);
 			}
-			printf(" #\n");
-#endif
-
-		// cyw 20190923
-		printf("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\r\n");
-			//HAL_Delay(3);//用于断帧	
-		
-		}
-		else
-		{
-			//printf("CRC is unknow,setup crc is %d,data crc is %d\n",SystemParameter.ReceiveCRC,p->status);
-		}
-		
-			//RFRXLedOff();
-		}
-		//时间校验互相发送
-		if(TimeCalibrationSingleSend)
-		{
-			Sx1301Busy();//IO指示忙状态
-			//RFTXLedOn();//busy 指示灯显示
-			TimeCalibrationSingleRxTx(nb_pkt);
-			Sx1301Free();//IO指示忙状态
-			//RFTXLedOff();//用户数据显示
-		}	
-		if(TimeCalibrationEachOtherSend)
-		{
-			Sx1301Busy();//IO指示忙状态
-			//RFTXLedOn();//busy 指示灯显示
-			TimeCalibrationEachOtherRxTx(nb_pkt);
-			Sx1301Free();//IO指示忙状态
-			//RFTXLedOff();//用户数据显示
-		}		
-# if 1
-if(SystemParameter.RFRxTxDebugEN)
-{
-	Sx1301Busy();//IO指示忙状态
-	//RFTXLedOn();//busy 指示灯显示
-	//HAL_Delay(10);
-	SX1301RxTxDebug(nb_pkt);//发送数据			
-	Sx1301Free();//IO指示忙状态
-	//RFTXLedOff();//用户数据显示
-}
-#endif
-		LORA_LEDSET(0);
-	}   
-	
-	
-	
+			
+				//RFRXLedOff();
+			}
+			//时间校验互相发送
+			if(TimeCalibrationSingleSend)
+			{
+				Sx1301Busy();//IO指示忙状态
+				//RFTXLedOn();//busy 指示灯显示
+				TimeCalibrationSingleRxTx(nb_pkt);
+				Sx1301Free();//IO指示忙状态
+				//RFTXLedOff();//用户数据显示
+			}	
+			if(TimeCalibrationEachOtherSend)
+			{
+				Sx1301Busy();//IO指示忙状态
+				//RFTXLedOn();//busy 指示灯显示
+				TimeCalibrationEachOtherRxTx(nb_pkt);
+				Sx1301Free();//IO指示忙状态
+				//RFTXLedOff();//用户数据显示
+			}		
+			# if 1
+			if(SystemParameter.RFRxTxDebugEN)
+			{
+				Sx1301Busy();//IO指示忙状态
+				//RFTXLedOn();//busy 指示灯显示
+				//HAL_Delay(10);
+				SX1301RxTxDebug(nb_pkt);//发送数据			
+				Sx1301Free();//IO指示忙状态
+				//RFTXLedOff();//用户数据显示
+			}
+			#endif
+			LORA_LEDSET(0);
+	}   	
 #if 0
     if (exit_sig == 1)
     {
@@ -1137,7 +1143,7 @@ if(SystemParameter.RFRxTxDebugEN)
 
     printf("\nEnd of test for loragw_hal.c\n");
 #endif
-		return 1;
+	return 1;
 }
 
 uint8_t SX1301RXDataQueryPin()
