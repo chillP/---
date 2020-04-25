@@ -182,9 +182,17 @@ void radioDataDecode(void)
 		//帧校验
 		if(rxpkt[0].payload[0]==0xE4 && rxpkt[0].payload[1]==0xFB)  //帧头
 		{
-			if(rxpkt[0].payload[2]==0x01)  //控制码
+			if(rxpkt[0].payload[2]==0x01)  //控制码：握手包
 			{
-				if(logLevel == 2) printf("Frame check ok\r\n");
+				
+			}
+			else if(rxpkt[0].payload[2]==0xF1)  //控制码：测试包1
+			{
+				
+			}
+			else if(rxpkt[0].payload[2]==0xF3)  //控制码：测试包3
+			{
+				
 			}
 			else
 			{
@@ -197,6 +205,15 @@ void radioDataDecode(void)
 			if(logLevel == 2) printf("Frame head check error\r\n");
 			frameCheckOk = false;	
 		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		//DEVEUI记录
 		for(uint8_t i=0;i<9;i++)
