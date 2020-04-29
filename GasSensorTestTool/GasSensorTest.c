@@ -6,6 +6,7 @@
 #include "gpio.h"
 #include "protocol_analysis.h"
 
+struct lgw_pkt_tx_s tx_packet;
 extern USART_RECEIVETYPE Usart2_RX;
 extern RFSystemParameter_TYPE SystemParameter;
 
@@ -18,15 +19,7 @@ extern struct lgw_conf_rxrf_s rfconfA,rfconfB;
 extern struct lgw_pkt_rx_s rxpkt[4]; 
 extern int nb_pkt;
 
-typedef struct  
-{  
-	uint8_t deveui[8];  //DTU设备号记录
-	float rssiDTU;  //节点RSSI
-	float rssiGW;  //网关侧RSSI
-	float snrDTU;  //节点侧SNR
-	float snrGW;  //网关侧SNR
-	uint8_t lifeCycle  //数据生命周期
-}DTU_INFO_TYPE;
+
 
 DTU_INFO_TYPE dtuInfoRecordBuf[20];
 
@@ -40,7 +33,7 @@ void TestMode_Init(void)
 {
 	//参数初始化
 	SystemParameter.LowDatarateOptmize = 0x60;
-	SystemParameter.RxPreambleLen = 15;
+	SystemParameter.RxPreambleLen = 8;
 	SystemParameter.ReceiveCRC = REC_CRC;
 	SystemParameter.CalibrationFailFlag = 0;
 	
@@ -103,6 +96,19 @@ void TestMode_Init(void)
 	
 	SystemParameter.LoRaMAC = 0;	
 	
+	//发射参数配置
+	tx_packet.bandwidth		= 	BW_125KHZ;
+	tx_packet.coderate		 =	 CR_LORA_4_5;
+	tx_packet.datarate 		= 	DR_LORA_SF7;
+	tx_packet.freq_hz 		= 	(uint32_t)(488.3*1e6);
+	tx_packet.modulation	 	= 	MOD_LORA;
+	tx_packet.no_crc 			= 	false;
+	tx_packet.preamble		 = 	8;
+	tx_packet.rf_chain		 = 	0;
+	tx_packet.rf_power		 = 	0;
+	tx_packet.tx_mode		 = 	IMMEDIATE;
+	tx_packet.size 			 =	12;	
+	
 	//1301启动标志
 	lgw_stop();
 	SX1301Status.NeedStartFlag = 1;		
@@ -161,6 +167,36 @@ void FactoryTestMode_Run(void)
 }
 
 /**
+ * @brief   查找数据包内的DEVEUI在信息动态存储区内的位置
+ * @details 
+ * @param   无
+ * @return  无
+ */
+uint8_t infoSearch(uint8_t* payload)
+{
+	uint8_t i,j=0;
+	
+	for(i=0;i<20;i++)
+	{
+		for(j=0;j<8+1;j++)
+		{
+			if(j>=8)  //检索到指定DEVEUI
+			{
+				return i;  //返回DEVEUI的存储位置
+			}
+			
+			if(payload[j+3] != dtuInfoRecordBuf[i].deveui[j])
+			{
+				break;
+			}
+		}
+	}
+	
+	return 100;  //未检索到当前DEVEUI
+}
+
+
+/**
  * @brief   霍尼DTU模拟网关 - 透传调试运行
  * @details 以调试指令响应节点的握手帧，进入透传模式后，模拟网关与DTU间建立透传通道
  * @param   无
@@ -180,110 +216,205 @@ void FactoryDebugMode_Run(void)
 void radioDataDecode(void)
 {
 	uint8_t testData[10]={0x00,0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08};
-	uint8_t handShakeAcp[12]={0xC8,0xDF,0x01,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};  //2字节帧头+1字节控制码+8字节DEVEUI
+	uint8_t handShakeAcp[16]={0xC8,0xDF,0x01,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0xB0,0xFB,0x00};  //2字节帧头+1字节控制码+8字节DEVEUI+...
+	uint8_t downLink1Pkt[14]={0xC8,0xDF,0xF2,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0X00,0X00};  //2字节帧头+1字节控制码+8字节DEVEUI
+	uint8_t downLink2Pkt[14]={0xC8,0xDF,0xF4,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0X00,0X00};  //2字节帧头+1字节控制码+8字节DEVEUI
 	uint8_t frameFaultFlag=0;
 	uint8_t send_access_flag=1;
 	uint8_t logLevel = 2;
 	bool frameCheckOk = true;
 	uint8_t i,j=0;
+	uint8_t pkt=0;
+	uint8_t freeBuffNum=0;
+	uint8_t infoBuffNum=0;
+	int8_t txRssi=0;
+	int8_t rxRss=0;
+	int8_t txSnr=0;
+	int8_t rxSnr=0;
 	
-	struct lgw_pkt_tx_s tx_packet;
-	
-	if(nb_pkt!=0)
+	for(pkt=0;pkt<nb_pkt;pkt++)
 	{
 		//帧校验
-		if(rxpkt[0].payload[0]==0xE4 && rxpkt[0].payload[1]==0xFB)  //帧头
+		if(rxpkt[pkt].payload[0]==0xE4 && rxpkt[pkt].payload[1]==0xFB)  //帧头
 		{
-			if(rxpkt[0].payload[2]==0x01)  //控制码：握手包
+			DEBUG_Printf("-get data: ");
+			for (i = 0;i<rxpkt[pkt].size;i++) 
 			{
-				//信息登记
-				for(i=0;i<20;i++)  //DTU信息活动存储区
-				{
-					if(dtuInfoRecordBuf[j].deveui != NULL)  //检索空闲存储区 #如何确保deveui存储的唯一性？
+				DEBUG_Printf("%02X ", rxpkt[pkt].payload[i]);
+			}
+			DEBUG_Printf("\r\n");
+			
+			switch (rxpkt[pkt].payload[2])
+			{
+				case 0x01:  //控制码：握手包
+					
+					for(i=0;i<21;i++)  //检索空闲存储区 
 					{
-						for(j=0;j<8;j++)  //存储DEVEUI
+						if(i>=20)  //无空闲存储区 
 						{
-							dtuInfoRecordBuf[j].deveui[j] = rxpkt[0].payload[i+3];  
+							freeBuffNum = 100;
+							break;
 						}
-						dtuInfoRecordBuf[j].lifeCycle = 20;  //设定生命周期
+						if(dtuInfoRecordBuf[i].lifeCycle == 0)  
+						{
+							freeBuffNum = i;
+							break;
+						}
 					}
-				}
-				//握手包发送
-				for(i=0;i<8;i++)  //下行包EUI即上行包中EUI
-				{
-					handShakeAcp[i+3]=rxpkt[0].payload[i+3];
-				}
-				for(i=0;i<12;i++)  //TXPacket赋值
-				{
-					tx_packet.payload[i] = handShakeAcp[i];
-				}
-				lgw_send(tx_packet);
-			}
-			else if(rxpkt[0].payload[2]==0xF1)  //控制码：测试包1
-			{
+					if(freeBuffNum != 100)
+					{
+						//存储DEVEUI
+						for(j=0;j<8;j++)  
+						{
+							dtuInfoRecordBuf[freeBuffNum].deveui[j] = rxpkt[pkt].payload[j+3];  
+						}
+						
+						//存储信号质量
+						//if(rxpkt[0].rssi < -127) rxpkt[0].rssi = -127;  //限幅
+						//DEBUG_Printf("RSSI: %.2f SNR: %.2f\r\n",rxpkt[pkt].rssi,rxpkt[pkt].snr);
+						//DEBUG_Printf("RSSI: %d SNR: %d\r\n",(int8_t)rxpkt[pkt].rssi, (int8_t)rxpkt[pkt].snr);
+						//dtuInfoRecordBuf[i].rssiDTU = (int8_t)rxpkt[pkt].rssi;
+						//dtuInfoRecordBuf[i].snrDTU = (int8_t)rxpkt[pkt].snr;
+						
+						//设定生命周期
+						dtuInfoRecordBuf[i].lifeCycle = 5;  
+			
+						//handShakeAcp[11] = dtuInfoRecordBuf[i].rssiDTU ;  //信号质量
+						//handShakeAcp[12] = dtuInfoRecordBuf[i].snrDTU ;
+						
+						//握手包发送
+						for(j=0;j<8;j++)  //下行包EUI即上行包中EUI
+						{
+							handShakeAcp[j+3]=rxpkt[pkt].payload[j+3];
+						}
+						
+						DEBUG_Printf("-send data: ");
+						for(j=0;j<16;j++)  //TXPacket赋值
+						{
+							tx_packet.payload[j] = handShakeAcp[j];
+							DEBUG_Printf("%02X",tx_packet.payload[j]);
+						}
+						DEBUG_Printf("\r\n");
+						tx_packet.size = 16;
+						lgw_send(tx_packet);				
+					}
+					else
+					{
+						DEBUG_Printf("-infoBuf is full !");
+					}
+					break;
+				case 0xF1:  //控制码：Uplink1
+					//CS校验
 				
-			}
-			else if(rxpkt[0].payload[2]==0xF3)  //控制码：测试包3
-			{
+					//DEVEUI检索
+					infoBuffNum = infoSearch(rxpkt[pkt].payload);
+					
+					//信息处理
+					if(infoBuffNum != 100)
+					{
+						dtuInfoRecordBuf[infoBuffNum].sensorTestResult = rxpkt[pkt].payload[13];  //保存串口测试结果
+						dtuInfoRecordBuf[infoBuffNum].rssiGW = (int8_t)rxpkt[pkt].rssi;  //记录Uplink1信号质量
+						dtuInfoRecordBuf[infoBuffNum].snrGW = (int8_t)rxpkt[pkt].snr;
+					
+						//Downlink1发送
+						for(i=0;i<8;i++)  //写入DEVEUI
+						{
+							downLink1Pkt[i+3] = dtuInfoRecordBuf[infoBuffNum].deveui[i];
+						}
+						
+						downLink1Pkt[11] = dtuInfoRecordBuf[infoBuffNum].rssiGW;  //写入Uplink1信号质量
+						downLink1Pkt[12] = dtuInfoRecordBuf[infoBuffNum].snrGW;
+						
+						DEBUG_Printf("-send data: ");
+						for(i=0;i<14;i++)  //TXPacket赋值
+						{
+							tx_packet.payload[i] = downLink1Pkt[i];
+							DEBUG_Printf("%02X",tx_packet.payload[i]);
+						}
+						DEBUG_Printf("\r\n");
+						tx_packet.size = 14;
+						lgw_send(tx_packet);
+					}
+					else
+					{
+						DEBUG_Printf("-deveui error: unhandshaked eui");
+					}
+
+					break;
+				case 0xF3:  //控制码：Uplink2
+					//CS校验
 				
-			}
-			else
-			{
-				if(logLevel == 2) printf("Ctrl bit check error\r\n");
-				frameCheckOk = false;	
-			}
+					//DEVEUI检索
+					infoBuffNum = infoSearch(rxpkt[pkt].payload);
+					
+					//信息处理
+					if(infoBuffNum != 100)
+					{
+						dtuInfoRecordBuf[infoBuffNum].rssiDTU = rxpkt[pkt].payload[11];  //记录Downlink1接收的信号质量
+						dtuInfoRecordBuf[infoBuffNum].snrDTU = rxpkt[pkt].payload[12];
+						
+						//Downlink2发送
+						for(i=0;i<8;i++)  //写入DEVEUI
+						{
+							downLink2Pkt[i+3] = dtuInfoRecordBuf[infoBuffNum].deveui[i];
+						}
+
+						DEBUG_Printf("-send data: ");
+						for(i=0;i<14;i++)  //TXPacket赋值
+						{
+							tx_packet.payload[i] = downLink2Pkt[i];
+							DEBUG_Printf("%02X",tx_packet.payload[i]);
+						}
+						DEBUG_Printf("\r\n");
+						tx_packet.size = 14;
+						lgw_send(tx_packet);
+						
+						//测试结果输出
+						int8_t txRssi = (int8_t)dtuInfoRecordBuf[infoBuffNum].rssiGW;
+						int8_t rxRssi = (int8_t)dtuInfoRecordBuf[infoBuffNum].rssiDTU;
+						int8_t txSnr = (int8_t)dtuInfoRecordBuf[infoBuffNum].snrGW;
+						int8_t rxSnr = (int8_t)dtuInfoRecordBuf[infoBuffNum].snrDTU;
+						
+						DEBUG_Printf("\r\n***Test Mode***\r\n");
+						DEBUG_Printf("&DEVEUI:");  //DEVEUI
+						for(i=0;i<8;i++)
+						{
+							DEBUG_Printf("%02x",dtuInfoRecordBuf[infoBuffNum].deveui[i]);
+						}
+						DEBUG_Printf("$\r\n");
+						
+						if(dtuInfoRecordBuf[infoBuffNum].sensorTestResult == 0xff) DEBUG_Printf("&SERIAL:pass$\r\n");  //串口测试结果
+						else printf("&SERIAL:fail$\r\n");
+						
+						if(txRssi>0) DEBUG_Printf("&TX-RSSI:+%d$\r\n",txRssi);  //信号质量输出
+						else DEBUG_Printf("&TX-RSSI:%d$\r\n",txRssi);
+						if(rxRssi>0) DEBUG_Printf("&RX-RSSI:+%d$\r\n",rxRssi);
+						else DEBUG_Printf("&TX-RSSI:%d$\r\n",rxRssi);
+						if(txSnr>0) DEBUG_Printf("&TX-SNR:+%d$\r\n",txSnr);
+						else DEBUG_Printf("&TX-RSSI:%d$\r\n",txSnr);
+						if(rxSnr>0) DEBUG_Printf("&RX-SNR:+%d$\r\n",rxSnr);
+						else DEBUG_Printf("&TX-RSSI:%d$\r\n\r\n",rxSnr);					
+						
+						//缓存清理
+						dtuInfoRecordBuf[infoBuffNum].lifeCycle = 0;  //完成测试后清除生命周期								
+					}
+					else
+					{
+						DEBUG_Printf("-deveui error: unhandshaked eui");
+					}
+									
+					break;
+				default:
+					if(logLevel == 2) printf("Ctrl bit check error\r\n");
+					frameCheckOk = false;	
+					break;				
+			}	
 		}
 		else
 		{
 			if(logLevel == 2) printf("Frame head check error\r\n");
 			frameCheckOk = false;	
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		//DEVEUI记录
-		for(uint8_t i=0;i<9;i++)
-		{
-			//if(rxpkt[0].payload[i] != testData[i])
-	
-		}
-		
-		//数据包发送
-		if(frameCheckOk)
-		{
-			DEBUG_Printf("Send packet: ");
-			
-			for(uint8_t i=0;i<9;i++)
-			{
-				tx_packet.payload[i] = 9-i;
-			}
-		
-			tx_packet.bandwidth		= 	BW_125KHZ;
-			tx_packet.coderate		 =	 CR_LORA_4_5;
-			tx_packet.datarate 		= 	DR_LORA_SF7;
-			tx_packet.freq_hz 		= 	(uint32_t)(488.3*1e6);
-			tx_packet.modulation	 	= 	MOD_LORA;
-			tx_packet.no_crc 			= 	false;
-			tx_packet.preamble		 = 	8;
-			tx_packet.rf_chain		 = 	0;
-			tx_packet.rf_power		 = 	10;
-			tx_packet.tx_mode		 = 	IMMEDIATE;
-			tx_packet.size 			 =	9;	
-			send_access_flag = lgw_send(tx_packet);
-			
-			DEBUG_Printf("Send packet: %d\r\n",send_access_flag);
-		}
-		
-		
-		
-		
 	}
 }
 

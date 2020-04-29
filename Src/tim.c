@@ -25,12 +25,16 @@
 #include "protocol_analysis.h"
 #include "usart.h"
 #include "ConfigTool.h"
+#include "GasSensorTest.h"
 
 extern struct SX1301Status_S SX1301Status;
 extern struct SystemRunStateSt SystemRunState;
+extern DTU_INFO_TYPE dtuInfoRecordBuf[];
+
 // 上位机连接标志
 extern uint8_t CT_ConnectUpper;
 extern uint8_t AT_ConnectUpper;
+
 
 /* USER CODE END 0 */
 
@@ -115,16 +119,21 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		static int MaxCount = 200;
 		static int i = 0;
 		static int j = 0;
+		uint8_t k=0;
 	
 		if(htim==(&htim2))
 		{
-			if(SX1301Status.StartSuccesFlag == 0){
+			if(SX1301Status.StartSuccesFlag == 0)
+			{
 				MaxCount = 200;
-			}else{
+			}
+			else
+			{
 				MaxCount = 1000;
 			}
 			
-			if(i >= MaxCount){
+			if(i >= MaxCount)
+			{
 				stat = !stat;
 				MODE_LEDSET(stat);
 				i = 0;
@@ -132,14 +141,23 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 			i++;
 			j++;
 			
-			if(j >= 1000){
-				if(SystemRunState.state == FactoryTestMode){
+			if(j >= 1000)  //每秒种，缓存区内数据生命周期-1
+			{
+				for(k=0;k<20;k++)
+				{
+					if(dtuInfoRecordBuf[k].lifeCycle > 0) dtuInfoRecordBuf[k].lifeCycle--;
+				}
+				
+				if(SystemRunState.state == FactoryTestMode)
+				{
 					//DEBUG_Printf("ConfigTool V1.2.2 Runing \r\n");
 				}
 				
-				if(SystemRunState.state == FactoryDebugMode){
+				if(SystemRunState.state == FactoryDebugMode)
+				{
 					//DEBUG_Printf("AnalysisTool V3.0.0 Runing \r\n");
 				}
+				
 				j = 0;
 			}
 			

@@ -737,14 +737,14 @@ uint8_t SX1301RXData()
 			lastsize = p->size ;
 			datacount = 0;//«Â¡„∑¢ÀÕª∫¥Ê
 			
-			DEBUG_Printf("lora payload: ");	
+//			DEBUG_Printf("lora payload: ");	
 
-			for (uint8_t j = 0; j < p->size; ++j) 
-			{
-				DEBUG_Printf("%02X ", p->payload[j]);
-			}
-			DEBUG_Printf(" #\r\n");
-			DEBUG_Printf("RSSI: %.2f SNR: %.2f\r\n",rxpkt[i].rssi,rxpkt[i].snr);
+//			for (uint8_t j = 0; j < p->size; ++j) 
+//			{
+//				DEBUG_Printf("%02X ", p->payload[j]);
+//			}
+//			DEBUG_Printf(" #\r\n");
+//			DEBUG_Printf("RSSI: %.2f SNR: %.2f\r\n",rxpkt[i].rssi,rxpkt[i].snr);
 		
 			
 //≤‚ ‘¡È√Ù∂»

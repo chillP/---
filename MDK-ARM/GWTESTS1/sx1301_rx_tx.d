@@ -1,14 +1,14 @@
 gwtests1\sx1301_rx_tx.o: ..\SX1301\tst\sx1301_rx_tx.c
-gwtests1\sx1301_rx_tx.o: D:\Useful\Keil for ARM V5.28\ARM\ARMCC\Bin\..\include\stdint.h
-gwtests1\sx1301_rx_tx.o: D:\Useful\Keil for ARM V5.28\ARM\ARMCC\Bin\..\include\stdbool.h
-gwtests1\sx1301_rx_tx.o: D:\Useful\Keil for ARM V5.28\ARM\ARMCC\Bin\..\include\stdio.h
-gwtests1\sx1301_rx_tx.o: D:\Useful\Keil for ARM V5.28\ARM\ARMCC\Bin\..\include\string.h
+gwtests1\sx1301_rx_tx.o: D:\Software\Keil5.28\ARM\ARMCC\Bin\..\include\stdint.h
+gwtests1\sx1301_rx_tx.o: D:\Software\Keil5.28\ARM\ARMCC\Bin\..\include\stdbool.h
+gwtests1\sx1301_rx_tx.o: D:\Software\Keil5.28\ARM\ARMCC\Bin\..\include\stdio.h
+gwtests1\sx1301_rx_tx.o: D:\Software\Keil5.28\ARM\ARMCC\Bin\..\include\string.h
 gwtests1\sx1301_rx_tx.o: ..\SX1301\inc\loragw_hal.h
 gwtests1\sx1301_rx_tx.o: ..\SX1301\inc\config.h
 gwtests1\sx1301_rx_tx.o: ..\SX1301\inc\loragw_reg.h
 gwtests1\sx1301_rx_tx.o: ..\SX1301\inc\loragw_aux.h
 gwtests1\sx1301_rx_tx.o: ..\SX1301\inc\loragw_user.h
-gwtests1\sx1301_rx_tx.o: D:\Useful\Keil for ARM V5.28\ARM\ARMCC\Bin\..\include\stdlib.h
+gwtests1\sx1301_rx_tx.o: D:\Software\Keil5.28\ARM\ARMCC\Bin\..\include\stdlib.h
 gwtests1\sx1301_rx_tx.o: ..\SX1301\inc\loragw_spi.h
 gwtests1\sx1301_rx_tx.o: ..\SX1301\inc\sx1301_rx_tx.h
 gwtests1\sx1301_rx_tx.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal.h
@@ -24,7 +24,7 @@ gwtests1\sx1301_rx_tx.o: ../Drivers/CMSIS/Include/core_cmFunc.h
 gwtests1\sx1301_rx_tx.o: ../Drivers/CMSIS/Device/ST/STM32L0xx/Include/system_stm32l0xx.h
 gwtests1\sx1301_rx_tx.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal.h
 gwtests1\sx1301_rx_tx.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h
-gwtests1\sx1301_rx_tx.o: D:\Useful\Keil for ARM V5.28\ARM\ARMCC\Bin\..\include\stddef.h
+gwtests1\sx1301_rx_tx.o: D:\Software\Keil5.28\ARM\ARMCC\Bin\..\include\stddef.h
 gwtests1\sx1301_rx_tx.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rcc_ex.h
 gwtests1\sx1301_rx_tx.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio.h
 gwtests1\sx1301_rx_tx.o: ../Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio_ex.h
