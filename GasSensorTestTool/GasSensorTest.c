@@ -7,6 +7,8 @@
 #include "protocol_analysis.h"
 
 struct lgw_pkt_tx_s tx_packet;
+uint8_t powerDtu=0;  //DTU缺省发射功率0dBm
+
 extern USART_RECEIVETYPE Usart2_RX;
 extern RFSystemParameter_TYPE SystemParameter;
 
@@ -204,7 +206,35 @@ uint8_t infoSearch(uint8_t* payload)
  */
 void FactoryDebugMode_Run(void)
 {
+	//启动
+	if(SX1301Status.NeedStartFlag ==1)
+	{
+		printf("SX1301 Starting...\r\n");
+		SX1301Status.StartSuccesFlag = SX1301Start(rfAp,rfBp,prxifms);
+		SX1301Status.NeedStartFlag =0;//清零启动标识
+		if(SX1301Status.StartSuccesFlag == 0)
+		{
+			Sx1301StartFail();//IO指示
+		}
+		else
+		{
+			Sx1301StartSucces();//IO指示
+		}		
+	}
 	
+	//握手包处理
+	if(SX1301Status.StartSuccesFlag == 1)
+	{
+		SX1301RXDataQueryPin();//使用这个需要开启SX1301的特殊功能引脚的指示
+		//DEBUG_Printf("Test mode runnning!!!\r\n");
+		//HAL_Delay(1000);
+	}
+	
+	//
+	radioDataDecode();
+	
+	//串口指令处理
+	serialDataDecode();	
 }
 
 /**
@@ -216,7 +246,7 @@ void FactoryDebugMode_Run(void)
 void radioDataDecode(void)
 {
 	uint8_t testData[10]={0x00,0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08};
-	uint8_t handShakeAcp[16]={0xC8,0xDF,0x01,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0xB0,0xFB,0x00};  //2字节帧头+1字节控制码+8字节DEVEUI+...
+	uint8_t handShakeAcp[16]={0xC8,0xDF,0x01,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x01,0x00,0xB0,0xFB,0x00};  //2字节帧头+1字节控制码+8字节DEVEUI+...
 	uint8_t downLink1Pkt[14]={0xC8,0xDF,0xF2,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0X00,0X00};  //2字节帧头+1字节控制码+8字节DEVEUI
 	uint8_t downLink2Pkt[14]={0xC8,0xDF,0xF4,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0X00,0X00};  //2字节帧头+1字节控制码+8字节DEVEUI
 	uint8_t frameFaultFlag=0;
@@ -287,6 +317,7 @@ void radioDataDecode(void)
 						{
 							handShakeAcp[j+3]=rxpkt[pkt].payload[j+3];
 						}
+			 			handShakeAcp[12] = powerDtu;  //DTU发射功率配置
 						
 						DEBUG_Printf("-send data: ");
 						for(j=0;j<16;j++)  //TXPacket赋值
